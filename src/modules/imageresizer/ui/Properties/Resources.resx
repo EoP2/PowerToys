@@ -296,4 +296,34 @@
   <data name="Input_ShrinkOnly.Content" xml:space="preserve">
     <value>_Make pictures smaller but not larger</value>
   </data>
+  <data name="Input_EnableAiSuperResolution" xml:space="preserve">
+    <value>Enable AI Super Resolution</value>
+  </data>
+  <data name="Input_AiOriginalSizeLabel" xml:space="preserve">
+    <value>Original size</value>
+  </data>
+  <data name="Input_AiEnhancedSizeLabel" xml:space="preserve">
+    <value>Enhanced size</value>
+  </data>
+  <data name="Input_AiUnknownSize" xml:space="preserve">
+    <value>Unavailable</value>
+  </data>
+  <data name="Input_AiMultipleFiles" xml:space="preserve">
+    <value>Multiple files selected</value>
+  </data>
+  <data name="Input_AiScaleFormat" xml:space="preserve">
+    <value>{0}×</value>
+  </data>
+  <data name="Input_AiScaleHelp" xml:space="preserve">
+    <value>Upscale to {0} times the original size.</value>
+  </data>
+  <data name="Input_AiScaleLabel" xml:space="preserve">
+    <value>Scale</value>
+  </data>
+  <data name="Input_AiCurrentLabel" xml:space="preserve">
+    <value>Current</value>
+  </data>
+  <data name="Input_AiNewLabel" xml:space="preserve">
+    <value>New</value>
+  </data>
 </root>

@@ -15,18 +15,29 @@
             <!--  other controls  -->
         </Grid.RowDefinitions>
 
-        <ComboBox
-            Name="SizeComboBox"
-            Grid.Row="0"
-            Height="64"
-            Margin="16"
-            HorizontalAlignment="Stretch"
-            VerticalAlignment="Stretch"
-            VerticalContentAlignment="Stretch"
-            AutomationProperties.HelpText="{Binding Settings.SelectedSize, Converter={StaticResource SizeTypeToHelpTextConverter}}"
-            AutomationProperties.Name="{x:Static p:Resources.Image_Sizes}"
-            ItemsSource="{Binding Settings.AllSizes}"
-            SelectedIndex="{Binding Settings.SelectedSizeIndex}">
+        <StackPanel Grid.Row="0" Margin="16">
+            <Grid HorizontalAlignment="Stretch">
+                <Grid.Style>
+                    <Style TargetType="Grid">
+                        <Setter Property="Visibility" Value="Visible" />
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding IsAiMode}" Value="True">
+                                <Setter Property="Visibility" Value="Collapsed" />
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </Grid.Style>
+
+                <ComboBox
+                    Name="SizeComboBox"
+                    Height="64"
+                    HorizontalAlignment="Stretch"
+                    VerticalAlignment="Stretch"
+                    VerticalContentAlignment="Stretch"
+                    AutomationProperties.HelpText="{Binding Settings.SelectedSize, Converter={StaticResource SizeTypeToHelpTextConverter}}"
+                    AutomationProperties.Name="{x:Static p:Resources.Image_Sizes}"
+                    ItemsSource="{Binding Settings.AllSizes}"
+                    SelectedItem="{Binding Settings.SelectedSize, Mode=TwoWay}">
             <ComboBox.ItemContainerStyle>
                 <Style BasedOn="{StaticResource {x:Type ComboBoxItem}}" TargetType="ComboBoxItem">
                     <Setter Property="AutomationProperties.Name" Value="{Binding Name}" />
@@ -68,7 +79,44 @@
                     </Grid>
                 </DataTemplate>
             </ComboBox.Resources>
-        </ComboBox>
+                </ComboBox>
+            </Grid>
+
+            <StackPanel Margin="0,8,0,0">
+                <StackPanel.Style>
+                    <Style TargetType="StackPanel">
+                        <Setter Property="Visibility" Value="Collapsed" />
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding IsAiMode}" Value="True">
+                                <Setter Property="Visibility" Value="Visible" />
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </StackPanel.Style>
+
+                <TextBlock
+                    Style="{StaticResource BodyStrongTextBlockStyle}"
+                    Text="{Binding AiScaleDescription}" />
+                <Slider
+                    Margin="0,8,0,0"
+                    Minimum="1"
+                    Maximum="8"
+                    TickFrequency="1"
+                    IsSnapToTickEnabled="True"
+                    IsSelectionRangeEnabled="False"
+                    TickPlacement="BottomRight"
+                    Ticks="1,2,3,4,5,6,7,8"
+                    Value="{Binding AiSuperResolutionScale, Mode=TwoWay}"
+                    AutomationProperties.Name="{x:Static p:Resources.Input_AiScaleLabel}" />
+
+                <StackPanel
+                    Margin="0,8,0,0"
+                    Visibility="{Binding ShowAiSizeDescriptions, Converter={StaticResource BoolValueConverter}}">
+                    <TextBlock Style="{StaticResource BodyTextBlockStyle}" Text="{Binding CurrentResolutionDescription}" />
+                    <TextBlock Margin="0,4,0,0" Style="{StaticResource BodyTextBlockStyle}" Text="{Binding NewResolutionDescription}" />
+                </StackPanel>
+            </StackPanel>
+        </StackPanel>
 
         <Grid Grid.Row="1">
             <Grid.RowDefinitions>
@@ -211,6 +259,12 @@
                 Grid.Row="1"
                 Margin="16"
                 Orientation="Vertical">
+                <CheckBox AutomationProperties.Name="{Binding RelativeSource={RelativeSource Self}, Path=Content.(AccessText.Text), Converter={StaticResource AccessTextToTextConverter}}" IsChecked="{Binding Settings.UseAiSuperResolution}">
+                    <CheckBox.Content>
+                        <AccessText Text="{x:Static p:Resources.Input_EnableAiSuperResolution}" TextWrapping="Wrap" />
+                    </CheckBox.Content>
+                </CheckBox>
+
                 <CheckBox AutomationProperties.Name="{Binding RelativeSource={RelativeSource Self}, Path=Content.(AccessText.Text), Converter={StaticResource AccessTextToTextConverter}}" IsChecked="{Binding Settings.ShrinkOnly}">
                     <CheckBox.Content>
                         <AccessText Text="{x:Static p:Resources.Input_ShrinkOnly}" TextWrapping="Wrap" />
