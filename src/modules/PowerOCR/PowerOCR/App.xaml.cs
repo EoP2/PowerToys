@@ -218,6 +218,7 @@ public partial class App : Application, IDisposable
                 Logger.LogDebug("Sparse package registration succeeded.");
                 return;
             }
+
             throw new InvalidOperationException("Sparse package registration did not complete successfully (status=" + op.Status + ").");
         }
         catch (COMException comEx) when ((uint)comEx.HResult == 0x80073D0B)

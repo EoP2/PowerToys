@@ -1,6 +1,6 @@
 Param(
     [Parameter(Mandatory=$false)]
-    [string]$Platform = "arm64",
+    [string]$Platform = "x64",
     [Parameter(Mandatory=$false)]
     [string]$Configuration = "Release",
     [switch]$Clean,
