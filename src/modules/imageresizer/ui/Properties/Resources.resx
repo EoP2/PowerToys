@@ -326,4 +326,25 @@
   <data name="Input_AiNewLabel" xml:space="preserve">
     <value>New</value>
   </data>
+  <data name="Input_AiModelChecking" xml:space="preserve">
+    <value>Checking AI model availability...</value>
+  </data>
+  <data name="Input_AiModelNotAvailable" xml:space="preserve">
+    <value>AI model not downloaded. Click Download to get started.</value>
+  </data>
+  <data name="Input_AiModelDisabledByUser" xml:space="preserve">
+    <value>AI feature is disabled by system settings.</value>
+  </data>
+  <data name="Input_AiModelNotSupported" xml:space="preserve">
+    <value>AI feature is not supported on this system.</value>
+  </data>
+  <data name="Input_AiModelDownloading" xml:space="preserve">
+    <value>Downloading AI model...</value>
+  </data>
+  <data name="Input_AiModelDownloadFailed" xml:space="preserve">
+    <value>Failed to download AI model. Please try again.</value>
+  </data>
+  <data name="Input_AiModelDownloadButton" xml:space="preserve">
+    <value>Download AI Model</value>
+  </data>
 </root>

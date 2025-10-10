@@ -82,12 +82,51 @@
                 </ComboBox>
             </Grid>
 
+            <!--  AI Model Download Prompt  -->
             <StackPanel Margin="0,8,0,0">
                 <StackPanel.Style>
                     <Style TargetType="StackPanel">
                         <Setter Property="Visibility" Value="Collapsed" />
                         <Style.Triggers>
-                            <DataTrigger Binding="{Binding IsAiMode}" Value="True">
+                            <DataTrigger Binding="{Binding ShowModelDownloadPrompt}" Value="True">
+                                <Setter Property="Visibility" Value="Visible" />
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </StackPanel.Style>
+
+                <ui:InfoBar
+                    IsOpen="True"
+                    IsClosable="False"
+                    Severity="Informational"
+                    Message="{Binding ModelStatusMessage}" />
+
+                <ui:Button
+                    Margin="0,8,0,0"
+                    HorizontalAlignment="Stretch"
+                    Appearance="Primary"
+                    Command="{Binding DownloadModelCommand}"
+                    Content="{x:Static p:Resources.Input_AiModelDownloadButton}"
+                    Visibility="{Binding IsModelDownloading, Converter={StaticResource BoolValueConverter}, ConverterParameter=Inverted}" />
+
+                <StackPanel
+                    Margin="0,8,0,0"
+                    Visibility="{Binding IsModelDownloading, Converter={StaticResource BoolValueConverter}}">
+                    <ui:ProgressRing IsIndeterminate="True" />
+                    <TextBlock
+                        Margin="0,8,0,0"
+                        HorizontalAlignment="Center"
+                        Text="{Binding ModelStatusMessage}" />
+                </StackPanel>
+            </StackPanel>
+
+            <!--  AI Scale Controls  -->
+            <StackPanel Margin="0,8,0,0">
+                <StackPanel.Style>
+                    <Style TargetType="StackPanel">
+                        <Setter Property="Visibility" Value="Collapsed" />
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding ShowAiControls}" Value="True">
                                 <Setter Property="Visibility" Value="Visible" />
                             </DataTrigger>
                         </Style.Triggers>

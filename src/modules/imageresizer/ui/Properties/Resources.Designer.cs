@@ -284,6 +284,69 @@ namespace ImageResizer.Properties {
                 return ResourceManager.GetString("Input_AiNewLabel", resourceCulture);
             }
         }
+
+        /// <summary>
+        ///   Looks up a localized string similar to Checking AI model availability...
+        /// </summary>
+        public static string Input_AiModelChecking {
+            get {
+                return ResourceManager.GetString("Input_AiModelChecking", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized string similar to AI model not downloaded. Click Download to get started.
+        /// </summary>
+        public static string Input_AiModelNotAvailable {
+            get {
+                return ResourceManager.GetString("Input_AiModelNotAvailable", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized string similar to AI feature is disabled by system settings.
+        /// </summary>
+        public static string Input_AiModelDisabledByUser {
+            get {
+                return ResourceManager.GetString("Input_AiModelDisabledByUser", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized string similar to AI feature is not supported on this system.
+        /// </summary>
+        public static string Input_AiModelNotSupported {
+            get {
+                return ResourceManager.GetString("Input_AiModelNotSupported", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized string similar to Downloading AI model...
+        /// </summary>
+        public static string Input_AiModelDownloading {
+            get {
+                return ResourceManager.GetString("Input_AiModelDownloading", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized string similar to Failed to download AI model. Please try again.
+        /// </summary>
+        public static string Input_AiModelDownloadFailed {
+            get {
+                return ResourceManager.GetString("Input_AiModelDownloadFailed", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized string similar to Download AI Model.
+        /// </summary>
+        public static string Input_AiModelDownloadButton {
+            get {
+                return ResourceManager.GetString("Input_AiModelDownloadButton", resourceCulture);
+            }
+        }
         
         /// <summary>
         ///   Looks up a localized string similar to Large.

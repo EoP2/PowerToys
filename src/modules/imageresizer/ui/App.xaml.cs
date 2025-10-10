@@ -17,6 +17,7 @@ using System.Windows;
 
 using ImageResizer.Models;
 using ImageResizer.Properties;
+using ImageResizer.Services;
 using ImageResizer.Utilities;
 using ImageResizer.ViewModels;
 using ImageResizer.Views;
