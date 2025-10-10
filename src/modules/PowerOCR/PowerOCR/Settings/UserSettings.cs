@@ -26,12 +26,14 @@ namespace PowerOCR.Settings
         private readonly IFileSystemWatcher _watcher;
         private readonly Lock _loadingSettingsLock = new();
 
+        // Simplified: default ON; backend handles actual availability.
         [ImportingConstructor]
         public UserSettings(Helpers.IThrottledActionInvoker throttledActionInvoker)
         {
             _settingsUtils = new SettingsUtils();
             ActivationShortcut = new SettingItem<string>(DefaultActivationShortcut);
             PreferredLanguage = new SettingItem<string>(string.Empty);
+            UseAITextRecognition = new SettingItem<bool>(true); // default ON: backend will fallback silently if unusable
 
             LoadSettingsFromJson();
 
@@ -43,57 +45,59 @@ namespace PowerOCR.Settings
 
         public SettingItem<string> PreferredLanguage { get; private set; }
 
+        // New setting to control AI recognizer usage (mirrors PowerOcrProperties.UseLocalAIIfAvailable)
+        public SettingItem<bool> UseAITextRecognition { get; private set; }
+
         private void LoadSettingsFromJson()
         {
             // TODO this IO call should by Async, update GetFileWatcher helper to support async
             lock (_loadingSettingsLock)
             {
+                var retry = true;
+                var retryCount = 0;
+
+                while (retry)
                 {
-                    var retry = true;
-                    var retryCount = 0;
-
-                    while (retry)
+                    try
                     {
-                        try
+                        retryCount++;
+
+                        if (!_settingsUtils.SettingsExists(PowerOcrModuleName))
                         {
-                            retryCount++;
+                            Logger.LogInfo("TextExtractor settings.json was missing, creating a new one");
+                            var defaultPowerOcrSettings = new PowerOcrSettings();
+                            defaultPowerOcrSettings.Save(_settingsUtils);
+                        }
 
-                            if (!_settingsUtils.SettingsExists(PowerOcrModuleName))
-                            {
-                                Logger.LogInfo("TextExtractor settings.json was missing, creating a new one");
-                                var defaultPowerOcrSettings = new PowerOcrSettings();
-                                defaultPowerOcrSettings.Save(_settingsUtils);
-                            }
+                        var settings = _settingsUtils.GetSettingsOrDefault<PowerOcrSettings>(PowerOcrModuleName);
+                        if (settings != null)
+                        {
+                            ActivationShortcut.Value = settings.Properties.ActivationShortcut.ToString();
+                            PreferredLanguage.Value = settings.Properties.PreferredLanguage.ToString();
+                            UseAITextRecognition.Value = settings.Properties.UseLocalAIIfAvailable;
+                        }
 
-                            var settings = _settingsUtils.GetSettingsOrDefault<PowerOcrSettings>(PowerOcrModuleName);
-                            if (settings != null)
-                            {
-                                ActivationShortcut.Value = settings.Properties.ActivationShortcut.ToString();
-                                PreferredLanguage.Value = settings.Properties.PreferredLanguage.ToString();
-                            }
-
+                        retry = false;
+                    }
+                    catch (IOException ex)
+                    {
+                        if (retryCount > MaxNumberOfRetry)
+                        {
                             retry = false;
                         }
-                        catch (IOException ex)
-                        {
-                            if (retryCount > MaxNumberOfRetry)
-                            {
-                                retry = false;
-                            }
 
-                            Logger.LogError("Failed to read changed settings", ex);
-                            Thread.Sleep(500);
-                        }
-                        catch (Exception ex)
+                        Logger.LogError("Failed to read changed settings", ex);
+                        Thread.Sleep(500);
+                    }
+                    catch (Exception ex)
+                    {
+                        if (retryCount > MaxNumberOfRetry)
                         {
-                            if (retryCount > MaxNumberOfRetry)
-                            {
-                                retry = false;
-                            }
-
-                            Logger.LogError("Failed to read changed settings", ex);
-                            Thread.Sleep(500);
+                            retry = false;
                         }
+
+                        Logger.LogError("Failed to read changed settings", ex);
+                        Thread.Sleep(500);
                     }
                 }
             }
@@ -121,5 +125,7 @@ namespace PowerOCR.Settings
             //
             // PowerToysTelemetry.Log.WriteEvent(telemetrySettings);
         }
+
+        // Capability probing removed; backend handles availability lazily.
     }
 }
