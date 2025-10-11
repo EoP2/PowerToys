@@ -10,6 +10,7 @@ using System.ComponentModel;
 using System.Globalization;
 using System.IO;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using System.Windows.Media.Imaging;
@@ -37,10 +38,18 @@ namespace ImageResizer.ViewModels
         private int? _originalHeight;
         private string _currentResolutionDescription;
         private string _newResolutionDescription;
-        private bool _isModelAvailable;
-        private bool _isModelDownloading;
+        private AiFeatureState _aiFeatureState = AiFeatureState.Unknown;
         private string _modelStatusMessage;
         private double _modelDownloadProgress;
+
+        public enum AiFeatureState
+        {
+            Unknown,           // Initial state, not yet checked
+            NotSupported,      // System doesn't support AI (non-ARM64 or policy disabled)
+            ModelNotReady,     // AI supported but model not downloaded
+            ModelDownloading,  // Model is being downloaded
+            Ready,             // AI fully ready to use
+        }
 
         public enum Dimension
         {
@@ -79,18 +88,15 @@ namespace ImageResizer.ViewModels
             EnterKeyPressedCommand = new RelayCommand<KeyPressParams>(HandleEnterKeyPress);
             DownloadModelCommand = new RelayCommand(async () => await DownloadModelAsync());
 
-            // Check if AI is already enabled in settings (loaded from previous session)
+            // Check AI availability on startup if user had enabled it previously
+            // CheckModelAvailabilityAsync will determine if AI is actually supported on this system
             if (settings?.UseAiSuperResolution == true)
             {
                 // Set initial checking state
-                IsModelAvailable = false;
-                IsModelDownloading = false;
+                _aiFeatureState = AiFeatureState.Unknown;
                 ModelStatusMessage = Resources.Input_AiModelChecking;
 
-                // Notify UI that computed properties need to update
-                OnPropertyChanged(nameof(ShowModelDownloadPrompt));
-                OnPropertyChanged(nameof(ShowAiControls));
-
+                // Start async check - this will update state and UI
                 _ = CheckModelAvailabilityAsync();
             }
         }
@@ -101,7 +107,8 @@ namespace ImageResizer.ViewModels
 
         public IEnumerable<ResizeUnit> ResizeUnitValues => Enum.GetValues<ResizeUnit>();
 
-        public bool IsAiMode => Settings?.UseAiSuperResolution == true;
+        // AI mode is only active when system supports it and user has enabled it
+        public bool IsAiMode => IsAiSupported && Settings?.UseAiSuperResolution == true;
 
         public int AiSuperResolutionScale
         {
@@ -133,19 +140,17 @@ namespace ImageResizer.ViewModels
             private set => Set(ref _newResolutionDescription, value);
         }
 
-        public bool ShowAiSizeDescriptions => Settings?.UseAiSuperResolution == true && !_hasMultipleFiles;
+        // Show AI size descriptions only when AI is supported, enabled, and not multiple files
+        public bool ShowAiSizeDescriptions => IsAiSupported && Settings?.UseAiSuperResolution == true && !_hasMultipleFiles;
 
-        public bool IsModelAvailable
-        {
-            get => _isModelAvailable;
-            private set => Set(ref _isModelAvailable, value);
-        }
+        // Helper property: Is AI supported on this system?
+        public bool IsAiSupported => _aiFeatureState != AiFeatureState.NotSupported && _aiFeatureState != AiFeatureState.Unknown;
 
-        public bool IsModelDownloading
-        {
-            get => _isModelDownloading;
-            private set => Set(ref _isModelDownloading, value);
-        }
+        // Helper property: Is model available and ready to use?
+        public bool IsModelAvailable => _aiFeatureState == AiFeatureState.Ready;
+
+        // Helper property: Is model currently being downloaded?
+        public bool IsModelDownloading => _aiFeatureState == AiFeatureState.ModelDownloading;
 
         public string ModelStatusMessage
         {
@@ -159,9 +164,14 @@ namespace ImageResizer.ViewModels
             private set => Set(ref _modelDownloadProgress, value);
         }
 
-        public bool ShowModelDownloadPrompt => Settings?.UseAiSuperResolution == true && !IsModelAvailable && !IsModelDownloading;
+        // Only show AI checkbox if the system supports AI features
+        public bool ShowEnableAiCheckBox => IsAiSupported;
 
-        public bool ShowAiControls => Settings?.UseAiSuperResolution == true && IsModelAvailable;
+        // Show download prompt only when: AI is supported, user enabled it, but model is not ready yet
+        public bool ShowModelDownloadPrompt => _aiFeatureState == AiFeatureState.ModelNotReady && Settings?.UseAiSuperResolution == true;
+
+        // Show AI controls only when: AI is supported, user enabled it, and model is ready
+        public bool ShowAiControls => IsAiMode && IsModelAvailable;
 
         public ICommand ResizeCommand { get; }
 
@@ -216,9 +226,8 @@ namespace ImageResizer.ViewModels
                             Settings.AiSuperResolutionScale = 2;
                         }
 
-                        // Set initial checking state before async call
-                        IsModelAvailable = false;
-                        IsModelDownloading = false;
+                        // User enabled AI - check if it's supported and available
+                        _aiFeatureState = AiFeatureState.Unknown;
                         ModelStatusMessage = Resources.Input_AiModelChecking;
                         _ = CheckModelAvailabilityAsync();
                     }
@@ -272,7 +281,8 @@ namespace ImageResizer.ViewModels
 
         private void UpdateAiDetails()
         {
-            if (Settings == null || !Settings.UseAiSuperResolution)
+            // Clear AI details if AI not supported or not enabled
+            if (Settings == null || !IsAiSupported || !Settings.UseAiSuperResolution)
             {
                 CurrentResolutionDescription = string.Empty;
                 NewResolutionDescription = string.Empty;
@@ -363,57 +373,69 @@ namespace ImageResizer.ViewModels
         {
             try
             {
-                // Check state using static method
+                // Step 1: Check system architecture - AI features require ARM64
+                var architecture = RuntimeInformation.ProcessArchitecture;
+                if (architecture != Architecture.Arm64)
+                {
+                    // SetAiState(AiFeatureState.NotSupported, Resources.Input_AiModelNotSupported);
+                    // return;
+                }
+
+                // Step 2: Check Windows AI service state
                 // Following the pattern from sample project (Sample.xaml.cs:31-52)
                 var readyState = WinAiSuperResolutionService.GetModelReadyState();
 
-                // Only Ready or NotReady states allow using AI functionality
-                // EnsureReadyAsync can only be called safely in these states
-                if (readyState is Microsoft.Windows.AI.AIFeatureReadyState.Ready
-                               or Microsoft.Windows.AI.AIFeatureReadyState.NotReady)
+                // Step 3: Map AI service state to our internal state
+                switch (readyState)
                 {
-                    if (readyState == Microsoft.Windows.AI.AIFeatureReadyState.Ready)
-                    {
-                        // Model is ready, initialize ImageScaler on UI thread
-                        IsModelAvailable = true;
-                        ModelStatusMessage = string.Empty;
+                    case Microsoft.Windows.AI.AIFeatureReadyState.Ready:
+                        // AI is fully supported and model is ready
+                        SetAiState(AiFeatureState.Ready, string.Empty);
                         await InitializeAiServiceAsync();
-                    }
-                    else
-                    {
-                        // NotReady
-                        // Model not downloaded, show download button
-                        IsModelAvailable = false;
-                        ModelStatusMessage = Resources.Input_AiModelNotAvailable;
-                    }
-                }
-                else
-                {
-                    // System doesn't support AI (DisabledByUser or NotSupported)
-                    // Don't call any AI APIs, just show error message
-                    IsModelAvailable = false;
+                        break;
 
-                    if (readyState == Microsoft.Windows.AI.AIFeatureReadyState.DisabledByUser)
-                    {
-                        ModelStatusMessage = Resources.Input_AiModelDisabledByUser;
-                    }
-                    else
-                    {
-                        ModelStatusMessage = Resources.Input_AiModelNotSupported;
-                    }
-                }
+                    case Microsoft.Windows.AI.AIFeatureReadyState.NotReady:
+                        // AI is supported but model needs to be downloaded
+                        SetAiState(AiFeatureState.ModelNotReady, Resources.Input_AiModelNotAvailable);
+                        break;
 
-                OnPropertyChanged(nameof(ShowModelDownloadPrompt));
-                OnPropertyChanged(nameof(ShowAiControls));
+                    case Microsoft.Windows.AI.AIFeatureReadyState.DisabledByUser:
+                        // User disabled AI features in system settings
+                        SetAiState(AiFeatureState.NotSupported, Resources.Input_AiModelDisabledByUser);
+                        break;
+
+                    default:
+                        // AI not supported on this system or unknown state
+                        SetAiState(AiFeatureState.NotSupported, Resources.Input_AiModelNotSupported);
+                        break;
+                }
             }
             catch (Exception)
             {
-                // GetReadyState failed, system doesn't support AI
-                IsModelAvailable = false;
-                ModelStatusMessage = Resources.Input_AiModelNotSupported;
-                OnPropertyChanged(nameof(ShowModelDownloadPrompt));
-                OnPropertyChanged(nameof(ShowAiControls));
+                // Failed to check AI state - treat as not supported
+                SetAiState(AiFeatureState.NotSupported, Resources.Input_AiModelNotSupported);
             }
+        }
+
+        private void SetAiState(AiFeatureState newState, string statusMessage)
+        {
+            _aiFeatureState = newState;
+            ModelStatusMessage = statusMessage;
+
+            // Notify UI of all related property changes
+            NotifyAiPropertiesChanged();
+        }
+
+        private void NotifyAiPropertiesChanged()
+        {
+            OnPropertyChanged(nameof(IsAiSupported));
+            OnPropertyChanged(nameof(IsModelAvailable));
+            OnPropertyChanged(nameof(IsModelDownloading));
+            OnPropertyChanged(nameof(ShowEnableAiCheckBox));
+            OnPropertyChanged(nameof(ShowModelDownloadPrompt));
+            OnPropertyChanged(nameof(ShowAiControls));
+            OnPropertyChanged(nameof(IsAiMode));
+            OnPropertyChanged(nameof(ShowAiSizeDescriptions));
         }
 
         private async Task InitializeAiServiceAsync()
@@ -452,43 +474,37 @@ namespace ImageResizer.ViewModels
         {
             try
             {
-                IsModelDownloading = true;
+                // Set state to downloading
+                SetAiState(AiFeatureState.ModelDownloading, Resources.Input_AiModelDownloading);
                 ModelDownloadProgress = 0;
-                ModelStatusMessage = Resources.Input_AiModelDownloading;
-                OnPropertyChanged(nameof(ShowModelDownloadPrompt));
 
-                // Call EnsureReadyAsync to download and prepare model
-                // This is safe because we already checked state is Ready or NotReady
+                // Call EnsureReadyAsync to download and prepare the AI model
+                // This is safe because we only show download button when state is ModelNotReady
                 // Following sample project pattern (Sample.xaml.cs:36)
                 var result = await WinAiSuperResolutionService.EnsureModelReadyAsync();
 
                 if (result?.Status == Microsoft.Windows.AI.AIFeatureReadyResultState.Success)
                 {
-                    // Model downloaded and ready
-                    IsModelAvailable = true;
-                    ModelStatusMessage = string.Empty;
+                    // Model successfully downloaded and ready
+                    SetAiState(AiFeatureState.Ready, string.Empty);
 
-                    // Initialize ImageScaler instance on UI thread
+                    // Initialize the AI service for actual use
                     await InitializeAiServiceAsync();
                 }
                 else
                 {
-                    // Download failed
-                    IsModelAvailable = false;
-                    ModelStatusMessage = Resources.Input_AiModelDownloadFailed;
+                    // Download failed - revert to not ready state
+                    SetAiState(AiFeatureState.ModelNotReady, Resources.Input_AiModelDownloadFailed);
                 }
             }
             catch (Exception)
             {
-                IsModelAvailable = false;
-                ModelStatusMessage = Resources.Input_AiModelDownloadFailed;
+                // Exception during download - revert to not ready state
+                SetAiState(AiFeatureState.ModelNotReady, Resources.Input_AiModelDownloadFailed);
             }
             finally
             {
-                IsModelDownloading = false;
                 ModelDownloadProgress = 0;
-                OnPropertyChanged(nameof(ShowModelDownloadPrompt));
-                OnPropertyChanged(nameof(ShowAiControls));
             }
         }
     }

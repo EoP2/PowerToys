@@ -298,7 +298,10 @@
                 Grid.Row="1"
                 Margin="16"
                 Orientation="Vertical">
-                <CheckBox AutomationProperties.Name="{Binding RelativeSource={RelativeSource Self}, Path=Content.(AccessText.Text), Converter={StaticResource AccessTextToTextConverter}}" IsChecked="{Binding Settings.UseAiSuperResolution}">
+                <CheckBox 
+                    AutomationProperties.Name="{Binding RelativeSource={RelativeSource Self}, Path=Content.(AccessText.Text), Converter={StaticResource AccessTextToTextConverter}}" 
+                    IsChecked="{Binding Settings.UseAiSuperResolution}"
+                    Visibility="{Binding ShowEnableAiCheckBox, Converter={StaticResource BoolValueConverter}}">
                     <CheckBox.Content>
                         <AccessText Text="{x:Static p:Resources.Input_EnableAiSuperResolution}" TextWrapping="Wrap" />
                     </CheckBox.Content>
