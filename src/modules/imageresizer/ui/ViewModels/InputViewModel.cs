@@ -377,8 +377,8 @@ namespace ImageResizer.ViewModels
                 var architecture = RuntimeInformation.ProcessArchitecture;
                 if (architecture != Architecture.Arm64)
                 {
-                    // SetAiState(AiFeatureState.NotSupported, Resources.Input_AiModelNotSupported);
-                    // return;
+                    SetAiState(AiFeatureState.NotSupported, Resources.Input_AiModelNotSupported);
+                    return;
                 }
 
                 // Step 2: Check Windows AI service state
