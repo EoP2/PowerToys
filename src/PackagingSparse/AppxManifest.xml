@@ -45,7 +45,7 @@
         Square44x44Logo="Images\Square44x44Logo.png">
       </uap:VisualElements>
     </Application>
-    <Application Id="PowerToys.SettingsUI" Executable="PowerToys.Settings.exe" uap10:TrustLevel="mediumIL" uap10:RuntimeBehavior="win32App">
+    <Application Id="PowerToys.SettingsUI" Executable="WinUI3Apps\PowerToys.Settings.exe" uap10:TrustLevel="mediumIL" uap10:RuntimeBehavior="win32App">
       <uap:VisualElements
         DisplayName="PowerToys.SettingsUI"
         Description="PowerToys Settings UI"

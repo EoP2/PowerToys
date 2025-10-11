@@ -129,8 +129,7 @@ if ($NoSign) {
     $plainPwd = (Get-Content -Path $CertPwdFile -Raw).Trim()
     # Try to load the PFX with the password to verify it is correct before signing
     try {
-        $cert = New-Object System.Security.Cryptography.X509Certificates.X509Certificate2
-        $cert.Import($CertPfxFile, $plainPwd, 'Exportable,PersistKeySet')
+        $cert = [System.Security.Cryptography.X509Certificates.X509Certificate2]::new($CertPfxFile, $plainPwd, 'Exportable,PersistKeySet')
         if (-not $cert.HasPrivateKey) {
             throw "Certificate does not have a private key."
         }
