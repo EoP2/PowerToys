@@ -20,7 +20,7 @@ internal sealed partial class FallbackExecuteItem : FallbackCommandItem, IDispos
 
     public FallbackExecuteItem(SettingsManager settings, Action<string>? addToHistory, ITelemetryService telemetryService)
         : base(
-            new NoOpCommand() { Id = "com.microsoft.run.fallback" },
+            new NoOpCommand() { Id = "com.microsoft.cmdpal.builtin.run.fallback" },
             ResourceLoaderInstance.GetString("shell_command_display_title"))
     {
         Title = string.Empty;

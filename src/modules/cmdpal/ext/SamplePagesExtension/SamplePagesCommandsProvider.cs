@@ -11,6 +11,7 @@ public partial class SamplePagesCommandsProvider : CommandProvider
 {
     public SamplePagesCommandsProvider()
     {
+        Id = "com.microsoft.cmdpal.samples.pages";
         DisplayName = "Sample Pages Commands";
         Icon = new IconInfo("\uE82D");
     }

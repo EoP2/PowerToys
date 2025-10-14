@@ -22,7 +22,7 @@ public partial class WebSearchCommandsProvider : CommandProvider
 
     public WebSearchCommandsProvider()
     {
-        Id = "WebSearch";
+        Id = "com.microsoft.cmdpal.builtin.websearch";
         DisplayName = Resources.extension_name;
         Icon = Icons.WebSearch;
         Settings = _settingsManager.Settings;

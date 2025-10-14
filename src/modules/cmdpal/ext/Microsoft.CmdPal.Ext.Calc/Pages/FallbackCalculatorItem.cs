@@ -14,7 +14,7 @@ public sealed partial class FallbackCalculatorItem : FallbackCommandItem
     private readonly ISettingsInterface _settings;
 
     public FallbackCalculatorItem(ISettingsInterface settings)
-        : base(new NoOpCommand(), Resources.calculator_title)
+        : base(new NoOpCommand() { Id = "com.microsoft.cmdpal.builtin.calculator.fallback" }, Resources.calculator_title)
     {
         Command = _copyCommand;
         _copyCommand.Name = string.Empty;

@@ -14,6 +14,7 @@ internal sealed partial class OpenURLCommand : InvokableCommand
 
     internal OpenURLCommand(string url)
     {
+        Id = "com.microsoft.cmdpal.builtin.websearch.openurl";
         Url = url;
         BrowserInfo.UpdateIfTimePassed();
         Icon = Icons.WebSearch;

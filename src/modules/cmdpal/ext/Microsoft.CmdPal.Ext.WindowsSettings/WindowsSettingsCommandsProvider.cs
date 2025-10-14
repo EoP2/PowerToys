@@ -22,7 +22,7 @@ public partial class WindowsSettingsCommandsProvider : CommandProvider
 
     public WindowsSettingsCommandsProvider()
     {
-        Id = "Windows.Settings";
+        Id = "com.microsoft.cmdpal.builtin.windows.settings";
         DisplayName = Resources.WindowsSettingsProvider_DisplayName;
         Icon = Icons.WindowsSettingsIcon;
 

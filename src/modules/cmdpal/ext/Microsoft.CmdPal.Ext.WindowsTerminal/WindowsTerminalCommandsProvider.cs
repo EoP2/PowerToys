@@ -17,7 +17,7 @@ public partial class WindowsTerminalCommandsProvider : CommandProvider
 
     public WindowsTerminalCommandsProvider()
     {
-        Id = "WindowsTerminalProfiles";
+        Id = "com.microsoft.cmdpal.builtin.windows.terminal";
         DisplayName = Resources.extension_name;
         Icon = Icons.TerminalIcon;
         Settings = _settingsManager.Settings;

@@ -18,7 +18,7 @@ public partial class WindowWalkerCommandsProvider : CommandProvider
 
     public WindowWalkerCommandsProvider()
     {
-        Id = "WindowWalker";
+        Id = "com.microsoft.cmdpal.builtin.windowwalker";
         DisplayName = Resources.windowwalker_name;
         Icon = Icons.WindowWalkerIcon;
         Settings = SettingsManager.Instance.Settings;

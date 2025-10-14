@@ -18,7 +18,7 @@ internal sealed partial class FallbackTimeDateItem : FallbackCommandItem
     private DateTime? _timestamp;
 
     public FallbackTimeDateItem(ISettingsInterface settings, DateTime? timestamp = null)
-         : base(new NoOpCommand(), Resources.Microsoft_plugin_timedate_fallback_display_title)
+         : base(new NoOpCommand() { Id = "com.microsoft.cmdpal.builtin.timedate.fallback" }, Resources.Microsoft_plugin_timedate_fallback_display_title)
     {
         Title = string.Empty;
         Subtitle = string.Empty;

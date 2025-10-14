@@ -19,7 +19,7 @@ public partial class SystemCommandExtensionProvider : CommandProvider
     public SystemCommandExtensionProvider()
     {
         DisplayName = Resources.Microsoft_plugin_ext_system_page_name;
-        Id = "System";
+        Id = "com.microsoft.cmdpal.builtin.system";
         _commands = [
             new CommandItem(Page)
             {

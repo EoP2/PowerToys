@@ -124,11 +124,17 @@ public partial class TopLevelCommandManager : ObservableObject,
                     {
                         commands.Add(item);
 
-                        var id = IdForTopLevelOrAppItem(item);
-
-                        if (!fallbacks.Contains(id))
+                        if (string.IsNullOrEmpty(item.Id))
                         {
-                            fallbacks.Add(id);
+                            // This should never happen, as the FallbackCommandItem constructor
+                            // enforces a non-null Id on its ICommand.
+                            Logger.LogWarning("Encountered a fallback command with a null Id; skipping persistence.");
+                            continue;
+                        }
+
+                        if (!fallbacks.Contains(item.Id))
+                        {
+                            fallbacks.Add(item.Id);
                             needToSaveSettings = true;
                         }
                     }
@@ -150,19 +156,6 @@ public partial class TopLevelCommandManager : ObservableObject,
         commandProvider.CommandsChanged += CommandProvider_CommandsChanged;
 
         return commands;
-    }
-
-    private string IdForTopLevelOrAppItem(IListItem topLevelOrAppItem)
-    {
-        if (topLevelOrAppItem is TopLevelViewModel topLevel)
-        {
-            return topLevel.Id;
-        }
-        else
-        {
-            // we've got an app here
-            return topLevelOrAppItem.Command?.Id ?? string.Empty;
-        }
     }
 
     // By all accounts, we're already on a background thread (the COM call

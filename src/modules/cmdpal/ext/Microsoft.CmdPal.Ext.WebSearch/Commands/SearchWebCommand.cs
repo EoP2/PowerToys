@@ -4,7 +4,6 @@
 
 using System;
 using Microsoft.CmdPal.Ext.WebSearch.Helpers;
-using Microsoft.CmdPal.Ext.WebSearch.Properties;
 using Microsoft.CommandPalette.Extensions.Toolkit;
 
 using BrowserInfo = Microsoft.CmdPal.Ext.WebSearch.Helpers.DefaultBrowserInfo;
@@ -19,6 +18,7 @@ internal sealed partial class SearchWebCommand : InvokableCommand
 
     internal SearchWebCommand(string arguments, ISettingsInterface settingsManager)
     {
+        Id = "com.microsoft.cmdpal.builtin.websearch.openinbrowser";
         Arguments = arguments;
         BrowserInfo.UpdateIfTimePassed();
         Icon = Icons.WebSearch;

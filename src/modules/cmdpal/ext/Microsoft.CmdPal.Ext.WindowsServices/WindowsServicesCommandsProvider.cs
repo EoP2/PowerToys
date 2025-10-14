@@ -13,7 +13,7 @@ public partial class WindowsServicesCommandsProvider : CommandProvider
     // For giggles, "%windir%\\system32\\filemgmt.dll" also _just works_.
     public WindowsServicesCommandsProvider()
     {
-        Id = "Windows.Services";
+        Id = "com.microsoft.cmdpal.builtin.windows.services";
         DisplayName = Resources.WindowsServicesProvider_DisplayName;
         Icon = Icons.ServicesIcon;
     }

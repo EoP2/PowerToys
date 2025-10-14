@@ -13,7 +13,7 @@ namespace Microsoft.CmdPal.Ext.Apps;
 
 public partial class AllAppsCommandProvider : CommandProvider
 {
-    public const string WellKnownId = "AllApps";
+    public const string WellKnownId = "com.microsoft.cmdpal.builtin.allapps";
 
     public static readonly AllAppsPage Page = new();
 
@@ -27,7 +27,9 @@ public partial class AllAppsCommandProvider : CommandProvider
 
     public AllAppsCommandProvider(AllAppsPage page)
     {
-        _page = page ?? throw new ArgumentNullException(nameof(page));
+        ArgumentNullException.ThrowIfNull(page);
+
+        _page = page;
         Id = WellKnownId;
         DisplayName = Resources.installed_apps;
         Icon = Icons.AllAppsIcon;

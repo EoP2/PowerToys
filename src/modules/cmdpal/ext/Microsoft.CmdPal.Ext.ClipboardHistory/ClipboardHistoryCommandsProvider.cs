@@ -28,7 +28,7 @@ public partial class ClipboardHistoryCommandsProvider : CommandProvider
 
         DisplayName = Properties.Resources.provider_display_name;
         Icon = Icons.ClipboardListIcon;
-        Id = "Windows.ClipboardHistory";
+        Id = "com.microsoft.cmdpal.builtin.clipboardhistory";
 
         Settings = _settingsManager.Settings;
     }

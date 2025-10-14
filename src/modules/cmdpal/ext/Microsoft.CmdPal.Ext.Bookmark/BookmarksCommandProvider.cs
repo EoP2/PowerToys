@@ -52,7 +52,7 @@ public sealed partial class BookmarksCommandProvider : CommandProvider
 
         _commandResolver = new BookmarkResolver(_placeholderParser);
 
-        Id = "Bookmarks";
+        Id = "com.microsoft.cmdpal.builtin.bookmarks";
         DisplayName = Resources.bookmarks_display_name;
         Icon = Icons.PinIcon;
 

@@ -11,6 +11,7 @@ internal sealed partial class ProcessMonitorCommandProvider : CommandProvider
 {
     public ProcessMonitorCommandProvider()
     {
+        Id = "com.microsoft.cmdpal.samples.processmonitor";
         DisplayName = "Process Monitor Commands";
     }
 

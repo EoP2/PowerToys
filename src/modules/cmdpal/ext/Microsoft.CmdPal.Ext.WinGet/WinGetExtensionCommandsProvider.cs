@@ -3,7 +3,6 @@
 // See the LICENSE file in the project root for more information.
 
 using System;
-using System.IO;
 using Microsoft.CommandPalette.Extensions;
 using Microsoft.CommandPalette.Extensions.Toolkit;
 
@@ -14,7 +13,7 @@ public partial class WinGetExtensionCommandsProvider : CommandProvider
     public WinGetExtensionCommandsProvider()
     {
         DisplayName = Properties.Resources.winget_display_name;
-        Id = "WinGet";
+        Id = "com.microsoft.cmdpal.builtin.winget";
         Icon = Icons.WinGetIcon;
 
         _ = WinGetStatics.Manager;

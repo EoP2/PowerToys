@@ -17,7 +17,7 @@ public partial class IndexerCommandsProvider : CommandProvider
 
     public IndexerCommandsProvider()
     {
-        Id = "Files";
+        Id = "com.microsoft.cmdpal.builtin.indexer";
         DisplayName = Resources.IndexerCommandsProvider_DisplayName;
         Icon = Icons.FileExplorerIcon;
 

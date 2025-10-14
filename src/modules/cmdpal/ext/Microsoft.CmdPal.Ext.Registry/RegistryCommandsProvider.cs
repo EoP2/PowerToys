@@ -15,7 +15,7 @@ public partial class RegistryCommandsProvider : CommandProvider
 
     public RegistryCommandsProvider()
     {
-        Id = "Windows.Registry";
+        Id = "com.microsoft.cmdpal.builtin.registry";
         DisplayName = Resources.RegistryProvider_DisplayName;
         Icon = Icons.RegistryIcon;
     }
