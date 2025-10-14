@@ -53,14 +53,14 @@ public partial class AliasManager : ObservableObject
 
     private void PopulateDefaultAliases()
     {
-        this.AddAlias(new CommandAlias(":", "com.microsoft.cmdpal.registry", true));
-        this.AddAlias(new CommandAlias("$", "com.microsoft.cmdpal.windowsSettings", true));
-        this.AddAlias(new CommandAlias("=", "com.microsoft.cmdpal.calculator", true));
-        this.AddAlias(new CommandAlias(">", "com.microsoft.cmdpal.shell", true));
-        this.AddAlias(new CommandAlias("<", "com.microsoft.cmdpal.windowwalker", true));
-        this.AddAlias(new CommandAlias("??", "com.microsoft.cmdpal.websearch", true));
-        this.AddAlias(new CommandAlias("file", "com.microsoft.indexer.fileSearch", false));
-        this.AddAlias(new CommandAlias(")", "com.microsoft.cmdpal.timedate", true));
+        this.AddAlias(new CommandAlias(":", "com.microsoft.cmdpal.builtin.registry", true));
+        this.AddAlias(new CommandAlias("$", "com.microsoft.cmdpal.builtin.windows.settings", true));
+        this.AddAlias(new CommandAlias("=", "com.microsoft.cmdpal.builtin.calculator", true));
+        this.AddAlias(new CommandAlias(">", "com.microsoft.cmdpal.builtin.run.shell", true));
+        this.AddAlias(new CommandAlias("<", "com.microsoft.cmdpal.builtin.windowwalker", true));
+        this.AddAlias(new CommandAlias("??", "com.microsoft.cmdpal.builtin.websearch", true));
+        this.AddAlias(new CommandAlias("file", "com.microsoft.cmdpal.builtin.indexer.fileSearch", false));
+        this.AddAlias(new CommandAlias(")", "com.microsoft.cmdpal.builtin.timedate", true));
     }
 
     public string? KeysFromId(string commandId)

@@ -38,7 +38,7 @@ public sealed partial class CalculatorListPage : DynamicListPage
         Icon = Icons.CalculatorIcon;
         Name = Resources.calculator_title;
         PlaceholderText = Resources.calculator_placeholder_text;
-        Id = "com.microsoft.cmdpal.calculator";
+        Id = "com.microsoft.cmdpal.builtin.calculator";
 
         _emptyItem = new ListItem(new NoOpCommand())
         {

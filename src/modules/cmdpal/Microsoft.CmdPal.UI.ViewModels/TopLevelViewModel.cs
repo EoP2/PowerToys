@@ -27,7 +27,7 @@ public sealed partial class TopLevelViewModel : ObservableObject, IListItem
 
     private readonly string _commandProviderId;
 
-    private string IdFromModel => _commandItemViewModel.Command.Id;
+    public string IdFromModel => _commandItemViewModel.Command.Id;
 
     private string _generatedId = string.Empty;
 

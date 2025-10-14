@@ -55,32 +55,29 @@ public class ProviderSettings
         return FallbackCommands.TryGetValue(command.Id, out var settings) ? settings.WeightBoost : 0;
     }
 
+    public bool FallbackIncludeInGlobalResults(TopLevelViewModel command)
+    {
+        return FallbackCommands.TryGetValue(command.Id, out var settings) ? settings.IncludeInGlobalResults : false;
+    }
+
     public void SetFallbackEnabled(TopLevelViewModel command, bool enabled)
     {
-        var existingSettings = FallbackCommands.TryGetValue(command.Id, out var settings) ? settings : new FallbackSettings(true, 0);
+        var existingSettings = FallbackCommands.TryGetValue(command.Id, out var settings) ? settings : new FallbackSettings();
         existingSettings.IsEnabled = enabled;
         FallbackCommands[command.Id] = existingSettings;
     }
 
     public void SetFallbackWeightBoost(TopLevelViewModel command, int weightBoost)
     {
-        var existingSettings = FallbackCommands.TryGetValue(command.Id, out var settings) ? settings : new FallbackSettings(true, 0);
+        var existingSettings = FallbackCommands.TryGetValue(command.Id, out var settings) ? settings : new FallbackSettings();
         existingSettings.WeightBoost = weightBoost;
         FallbackCommands[command.Id] = existingSettings;
     }
-}
 
-#pragma warning disable SA1402 // File may only contain a single type
-public sealed class FallbackSettings
-{
-    public bool IsEnabled { get; set; } = true;
-
-    public int WeightBoost { get; set; }
-
-    public FallbackSettings(bool isEnabled, int weightBoost)
+    public void SetFallbackIncludeInGlobalResults(TopLevelViewModel command, bool includeInGlobalResults)
     {
-        IsEnabled = isEnabled;
-        WeightBoost = weightBoost;
+        var existingSettings = FallbackCommands.TryGetValue(command.Id, out var settings) ? settings : new FallbackSettings();
+        existingSettings.IncludeInGlobalResults = includeInGlobalResults;
+        FallbackCommands[command.Id] = existingSettings;
     }
 }
-#pragma warning restore SA1402 // File may only contain a single type

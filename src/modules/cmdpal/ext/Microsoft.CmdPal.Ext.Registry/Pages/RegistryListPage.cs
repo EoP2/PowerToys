@@ -24,7 +24,7 @@ internal sealed partial class RegistryListPage : DynamicListPage
     {
         Icon = Icons.RegistryIcon;
         Name = Title = Resources.Registry_Page_Title;
-        Id = "com.microsoft.cmdpal.registry";
+        Id = "com.microsoft.cmdpal.builtin.registry";
         _settingsManager = settingsManager;
         _emptyMessage = new CommandItem()
         {

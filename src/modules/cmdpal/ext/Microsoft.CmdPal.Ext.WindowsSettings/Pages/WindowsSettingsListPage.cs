@@ -2,10 +2,8 @@
 // The Microsoft Corporation licenses this file to you under the MIT license.
 // See the LICENSE file in the project root for more information.
 
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using Microsoft.CmdPal.Ext.WindowsSettings.Classes;
 using Microsoft.CmdPal.Ext.WindowsSettings.Helpers;
 using Microsoft.CmdPal.Ext.WindowsSettings.Properties;
 using Microsoft.CommandPalette.Extensions;
@@ -21,7 +19,7 @@ internal sealed partial class WindowsSettingsListPage : DynamicListPage
     {
         Icon = Icons.WindowsSettingsIcon;
         Name = Resources.settings_title;
-        Id = "com.microsoft.cmdpal.windowsSettings";
+        Id = "com.microsoft.cmdpal.builtin.windows.settings";
         _windowsSettings = windowsSettings;
 
         EmptyContent = new CommandItem(new NoOpCommand())

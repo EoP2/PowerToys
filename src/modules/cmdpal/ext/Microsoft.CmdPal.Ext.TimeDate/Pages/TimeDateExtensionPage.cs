@@ -27,7 +27,7 @@ internal sealed partial class TimeDateExtensionPage : DynamicListPage
         Title = Resources.Microsoft_plugin_timedate_main_page_title;
         Name = Resources.Microsoft_plugin_timedate_main_page_name;
         PlaceholderText = Resources.Microsoft_plugin_timedate_placeholder_text;
-        Id = "com.microsoft.cmdpal.timedate";
+        Id = "com.microsoft.cmdpal.builtin.timedate";
         _settingsManager = settingsManager;
         ShowDetails = true;
     }

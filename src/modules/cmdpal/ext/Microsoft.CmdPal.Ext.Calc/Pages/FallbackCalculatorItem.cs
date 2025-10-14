@@ -10,7 +10,7 @@ namespace Microsoft.CmdPal.Ext.Calc.Pages;
 
 public sealed partial class FallbackCalculatorItem : FallbackCommandItem
 {
-    private readonly CopyTextCommand _copyCommand = new(string.Empty);
+    private readonly CopyTextCommand _copyCommand = new(string.Empty) { Id = "com.microsoft.cmdpal.builtin.calculator.fallback" };
     private readonly ISettingsInterface _settings;
 
     public FallbackCalculatorItem(ISettingsInterface settings)

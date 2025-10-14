@@ -4,7 +4,6 @@
 
 using System;
 using System.Collections.Generic;
-using System.Globalization;
 using Microsoft.CmdPal.Ext.WindowWalker.Components;
 using Microsoft.CmdPal.Ext.WindowWalker.Properties;
 using Microsoft.CommandPalette.Extensions;
@@ -22,7 +21,7 @@ internal sealed partial class WindowWalkerListPage : DynamicListPage, IDisposabl
     {
         Icon = Icons.WindowWalkerIcon;
         Name = Resources.windowwalker_name;
-        Id = "com.microsoft.cmdpal.windowwalker";
+        Id = "com.microsoft.cmdpal.builtin.windowwalker";
         PlaceholderText = Resources.windowwalker_PlaceholderText;
 
         EmptyContent = new CommandItem(new NoOpCommand())

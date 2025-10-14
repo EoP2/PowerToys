@@ -574,7 +574,7 @@ public partial class MainListPage : DynamicListPage,
 
     private List<Scored<IListItem>> ScoreFallbackItems(IEnumerable<IListItem> newFallbacks)
     {
-        var fallbackRanks = _settings.FallbackWeights;
+        var fallbackRanks = _settings.ProviderSettings;
 
         List<Scored<IListItem>> scoredFallbacks = new List<Scored<IListItem>>();
 

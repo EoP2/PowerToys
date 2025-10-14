@@ -36,7 +36,7 @@ internal sealed partial class ShellListPage : DynamicListPage, IDisposable
         ITelemetryService? telemetryService)
     {
         Icon = Icons.RunV2Icon;
-        Id = "com.microsoft.cmdpal.shell";
+        Id = "com.microsoft.cmdpal.builtin.run.shell";
         Name = ResourceLoaderInstance.GetString("cmd_plugin_name");
         PlaceholderText = ResourceLoaderInstance.GetString("list_placeholder_text");
         _historyService = runHistoryService;

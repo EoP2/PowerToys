@@ -462,4 +462,7 @@ Right-click to remove the key combination, thereby deactivating the shortcut.</v
   <data name="ScreenReader_Announcement_NavigatedToPage0" xml:space="preserve">
     <value>Navigated to {0} page</value>
   </data>
+  <data name="Settings_GeneralPage_NavigationViewItem_Fallbacks.Content" xml:space="preserve">
+    <value>Fallbacks</value>
+  </data>
 </root>

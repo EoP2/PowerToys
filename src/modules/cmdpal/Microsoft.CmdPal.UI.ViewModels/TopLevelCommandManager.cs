@@ -115,35 +115,12 @@ public partial class TopLevelCommandManager : ObservableObject,
                     commands.Add(item);
                 }
 
-                var needToSaveSettings = false;
-                var fallbacks = _settingsModel.FallbackWeights;
-
                 foreach (var item in commandProvider.FallbackItems)
                 {
                     if (item.IsEnabled)
                     {
                         commands.Add(item);
-
-                        if (string.IsNullOrEmpty(item.Id))
-                        {
-                            // This should never happen, as the FallbackCommandItem constructor
-                            // enforces a non-null Id on its ICommand.
-                            Logger.LogWarning("Encountered a fallback command with a null Id; skipping persistence.");
-                            continue;
-                        }
-
-                        if (!fallbacks.Contains(item.Id))
-                        {
-                            fallbacks.Add(item.Id);
-                            needToSaveSettings = true;
-                        }
                     }
-                }
-
-                if (needToSaveSettings)
-                {
-                    _settingsModel.FallbackWeights = fallbacks;
-                    SettingsModel.SaveSettings(_settingsModel);
                 }
 
                 return commands;

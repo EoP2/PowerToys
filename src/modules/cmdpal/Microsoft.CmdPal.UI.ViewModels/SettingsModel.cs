@@ -54,8 +54,6 @@ public partial class SettingsModel : ObservableObject
 
     public bool DisableAnimations { get; set; } = true;
 
-    public List<string> FallbackWeights { get; set; } = [];
-
     // END SETTINGS
     ///////////////////////////////////////////////////////////////////////////
 
