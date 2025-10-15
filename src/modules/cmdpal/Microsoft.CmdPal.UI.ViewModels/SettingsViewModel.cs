@@ -140,6 +140,8 @@ public partial class SettingsViewModel : INotifyPropertyChanged
 
     public ObservableCollection<ProviderSettingsViewModel> CommandProviders { get; } = [];
 
+    public ObservableCollection<FallbackSettingsViewModel> FallbackCommands { get; } = [];
+
     public SettingsViewModel(SettingsModel settings, IServiceProvider serviceProvider, TaskScheduler scheduler)
     {
         _settings = settings;
@@ -154,6 +156,15 @@ public partial class SettingsViewModel : INotifyPropertyChanged
 
             var settingsModel = new ProviderSettingsViewModel(item, providerSettings, _serviceProvider);
             CommandProviders.Add(settingsModel);
+
+            if (settingsModel.HasFallbackCommands)
+            {
+                foreach (var fallback in settingsModel.FallbackCommands)
+                {
+                    var fallbackSettings = new FallbackSettingsViewModel(fallback, _serviceProvider);
+                    FallbackCommands.Add(fallbackSettings);
+                }
+            }
         }
     }
 
