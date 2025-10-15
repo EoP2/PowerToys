@@ -26,13 +26,13 @@
                     HorizontalAlignment="Stretch"
                     Spacing="{StaticResource SettingsCardSpacing}">
 
-                    <ItemsRepeater ItemsSource="{x:Bind viewModel.CommandProviders, Mode=OneWay}" Layout="{StaticResource VerticalStackLayout}">
+                    <ItemsRepeater ItemsSource="{x:Bind viewModel.FallbackCommands, Mode=OneWay}" Layout="{StaticResource VerticalStackLayout}">
                         <ItemsRepeater.ItemTemplate>
-                            <DataTemplate x:DataType="viewModels:ProviderSettingsViewModel">
+                            <DataTemplate x:DataType="viewModels:FallbackSettingsViewModel">
                                 <controls:SettingsCard
                                     Click="SettingsCard_Click"
                                     DataContext="{x:Bind}"
-                                    Description="{x:Bind ExtensionSubtext, Mode=OneWay}"
+                                    Description="{x:Bind Subtitle, Mode=OneWay}"
                                     Header="{x:Bind DisplayName, Mode=OneWay}"
                                     IsClickEnabled="True">
                                     <controls:SettingsCard.HeaderIcon>

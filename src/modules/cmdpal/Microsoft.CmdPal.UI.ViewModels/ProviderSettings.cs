@@ -50,11 +50,6 @@ public class ProviderSettings
         return FallbackCommands.TryGetValue(command.Id, out var settings) ? settings.IsEnabled : true;
     }
 
-    public int FallbackWeightBoost(TopLevelViewModel command)
-    {
-        return FallbackCommands.TryGetValue(command.Id, out var settings) ? settings.WeightBoost : 0;
-    }
-
     public bool FallbackIncludeInGlobalResults(TopLevelViewModel command)
     {
         return FallbackCommands.TryGetValue(command.Id, out var settings) ? settings.IncludeInGlobalResults : false;
@@ -64,13 +59,6 @@ public class ProviderSettings
     {
         var existingSettings = FallbackCommands.TryGetValue(command.Id, out var settings) ? settings : new FallbackSettings();
         existingSettings.IsEnabled = enabled;
-        FallbackCommands[command.Id] = existingSettings;
-    }
-
-    public void SetFallbackWeightBoost(TopLevelViewModel command, int weightBoost)
-    {
-        var existingSettings = FallbackCommands.TryGetValue(command.Id, out var settings) ? settings : new FallbackSettings();
-        existingSettings.WeightBoost = weightBoost;
         FallbackCommands[command.Id] = existingSettings;
     }
 

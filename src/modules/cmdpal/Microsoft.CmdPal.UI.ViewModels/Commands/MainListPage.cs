@@ -409,7 +409,9 @@ public partial class MainListPage : DynamicListPage,
                 return;
             }
 
-            _fallbackItems = ScoreFallbackItems(newFallbacks);
+            var fallbackRanks = GetFallbackRanks();
+
+            _fallbackItems = ScoreFallbackItems(newFallbacks, fallbackRanks);
 
             if (token.IsCancellationRequested)
             {
@@ -572,29 +574,50 @@ public partial class MainListPage : DynamicListPage,
         return (int)finalScore;
     }
 
-    private List<Scored<IListItem>> ScoreFallbackItems(IEnumerable<IListItem> newFallbacks)
+    private List<Scored<IListItem>> ScoreFallbackItems(IEnumerable<IListItem> newFallbacks, Dictionary<string, int> fallbackWeights)
     {
-        var fallbackRanks = _settings.ProviderSettings;
-
         List<Scored<IListItem>> scoredFallbacks = new List<Scored<IListItem>>();
 
         foreach (var item in newFallbacks)
         {
-            var id = IdForTopLevelOrAppItem(item);
+            var fallbackCommandId = item.Command?.Id;
 
-            var position = fallbackRanks.IndexOf(id);
-
-            if (position < 0)
+            if (string.IsNullOrWhiteSpace(fallbackCommandId))
             {
-                position = fallbackRanks.Count;
+                continue;
             }
 
-            var score = fallbackRanks.Count - position;
+            var score = 1;
+
+            if (fallbackWeights.TryGetValue(fallbackCommandId, out var weight))
+            {
+                score += weight;
+            }
 
             scoredFallbacks.Add(new Scored<IListItem>() { Item = item, Score = score });
         }
 
         return scoredFallbacks.OrderByDescending(o => o.Score).ToList();
+    }
+
+    public Dictionary<string, int> GetFallbackRanks()
+    {
+        var providerSettings = _settings.ProviderSettings;
+        var fallbackRanks = new Dictionary<string, int>();
+
+        foreach (var provider in providerSettings.Values)
+        {
+            for (var i = 0; i < provider.FallbackCommands.Count; i++)
+            {
+                var fallback = provider.FallbackCommands.ElementAt(i);
+                if (fallback.Value.IsEnabled)
+                {
+                    fallbackRanks.Add(fallback.Key, fallback.Value.WeightBoost);
+                }
+            }
+        }
+
+        return fallbackRanks;
     }
 
     public void UpdateHistory(IListItem topLevelOrAppItem)

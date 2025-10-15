@@ -157,12 +157,18 @@ public partial class SettingsViewModel : INotifyPropertyChanged
             var settingsModel = new ProviderSettingsViewModel(item, providerSettings, _serviceProvider);
             CommandProviders.Add(settingsModel);
 
-            if (settingsModel.HasFallbackCommands)
+            if (item.FallbackItems is not null && item.FallbackItems.Length > 0)
             {
-                foreach (var fallback in settingsModel.FallbackCommands)
+                foreach (var fallback in item.FallbackItems)
                 {
-                    var fallbackSettings = new FallbackSettingsViewModel(fallback, _serviceProvider);
-                    FallbackCommands.Add(fallbackSettings);
+                    FallbackSettings fallbackSettings = new();
+                    if (providerSettings.FallbackCommands.TryGetValue(fallback.IdFromModel, out var existingSettings))
+                    {
+                        fallbackSettings = existingSettings;
+                    }
+
+                    var fallbackSettingsModel = new FallbackSettingsViewModel(fallback, fallbackSettings, item, settingsModel, _serviceProvider);
+                    FallbackCommands.Add(fallbackSettingsModel);
                 }
             }
         }
