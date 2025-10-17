@@ -14,21 +14,25 @@ namespace Microsoft.CmdPal.UI.ViewModels;
 public partial class FallbackSettingsViewModel(
     TopLevelViewModel fallback,
     FallbackSettings _fallbackSettings,
-    CommandProviderWrapper _provider,
     ProviderSettingsViewModel _providerSettings,
     IServiceProvider _serviceProvider) : ObservableObject
 {
     private readonly SettingsModel _settings = _serviceProvider.GetService<SettingsModel>()!;
 
-    public string DisplayName => fallback.DisplayTitle;
-
-    public string Subtitle => fallback.Subtitle;
+    public string DisplayName => string.IsNullOrWhiteSpace(fallback.DisplayTitle)
+        ? (string.IsNullOrWhiteSpace(fallback.Title) ? _providerSettings.DisplayName : fallback.Title)
+        : fallback.DisplayTitle;
 
     public string ExtensionName => _providerSettings.ExtensionName;
 
     public IExtensionWrapper? Extension => _providerSettings.Extension;
 
     public string ExtensionVersion => _providerSettings.ExtensionVersion;
+
+    // Use only the underlying command Id. If it is empty, persistence will skip or later populate when the Id becomes available.
+    public string FallbackId => fallback.IdFromModel;
+
+    public string ProviderId => fallback.CommandProviderId;
 
     public IconInfoViewModel Icon => _providerSettings.Icon;
 
@@ -51,20 +55,35 @@ public partial class FallbackSettingsViewModel(
                 WeakReferenceMessenger.Default.Send<ReloadCommandsMessage>(new());
                 OnPropertyChanged(nameof(IsEnabled));
             }
+        }
+    }
 
-            if (value == true)
+    public bool IncludeInGlobalResults
+    {
+        get => _fallbackSettings.IncludeInGlobalResults;
+        set
+        {
+            if (value != _fallbackSettings.IncludeInGlobalResults)
             {
-                _provider.CommandsChanged -= Provider_CommandsChanged;
-                _provider.CommandsChanged += Provider_CommandsChanged;
+                _fallbackSettings.IncludeInGlobalResults = value;
+                Save();
+                WeakReferenceMessenger.Default.Send<ReloadCommandsMessage>(new());
+                OnPropertyChanged(nameof(IncludeInGlobalResults));
+            }
+        }
+    }
+
+    public int WeightBoost
+    {
+        get => _fallbackSettings.WeightBoost;
+        set
+        {
+            if (value != _fallbackSettings.WeightBoost)
+            {
+                _fallbackSettings.WeightBoost = value;
             }
         }
     }
 
     private void Save() => SettingsModel.SaveSettings(_settings);
-
-    private void Provider_CommandsChanged(CommandProviderWrapper sender, CommandPalette.Extensions.IItemsChangedEventArgs args)
-    {
-        OnPropertyChanged(nameof(_providerSettings.ExtensionSubtext));
-        OnPropertyChanged(nameof(_providerSettings.FallbackCommands));
-    }
 }

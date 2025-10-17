@@ -12,8 +12,10 @@ namespace Microsoft.CmdPal.Ext.System;
 
 internal sealed partial class FallbackSystemCommandItem : FallbackCommandItem
 {
+    private const string _stableId = "com.microsoft.cmdpal.builtin.system.fallback";
+
     public FallbackSystemCommandItem(ISettingsInterface settings)
-        : base(new NoOpCommand() { Id = "com.microsoft.cmdpal.builtin.system.fallback" }, Resources.Microsoft_plugin_ext_fallback_display_title)
+        : base(new NoOpCommand() { Id = _stableId }, Resources.Microsoft_plugin_ext_fallback_display_title)
     {
         Title = string.Empty;
         Subtitle = string.Empty;
@@ -33,7 +35,7 @@ internal sealed partial class FallbackSystemCommandItem : FallbackCommandItem
     {
         if (string.IsNullOrWhiteSpace(query))
         {
-            Command = null;
+            Command = new NoOpCommand() { Id = _stableId };
             Title = string.Empty;
             Subtitle = string.Empty;
             return;
@@ -60,7 +62,7 @@ internal sealed partial class FallbackSystemCommandItem : FallbackCommandItem
 
         if (result is null)
         {
-            Command = null;
+            Command = new NoOpCommand() { Id = _stableId };
             Title = string.Empty;
             Subtitle = string.Empty;
 

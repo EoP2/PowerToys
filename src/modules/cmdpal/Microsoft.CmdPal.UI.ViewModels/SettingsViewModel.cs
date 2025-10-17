@@ -4,6 +4,8 @@
 
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using CommunityToolkit.Mvvm.Messaging;
+using Microsoft.CmdPal.UI.ViewModels.Messages;
 using Microsoft.CmdPal.UI.ViewModels.Settings;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -140,7 +142,9 @@ public partial class SettingsViewModel : INotifyPropertyChanged
 
     public ObservableCollection<ProviderSettingsViewModel> CommandProviders { get; } = [];
 
-    public ObservableCollection<FallbackSettingsViewModel> FallbackCommands { get; } = [];
+    public ObservableCollection<FallbackSettingsViewModel> EnabledFallbackCommands { get; } = [];
+
+    public ObservableCollection<FallbackSettingsViewModel> DisabledFallbackCommands { get; } = [];
 
     public SettingsViewModel(SettingsModel settings, IServiceProvider serviceProvider, TaskScheduler scheduler)
     {
@@ -148,12 +152,10 @@ public partial class SettingsViewModel : INotifyPropertyChanged
         _serviceProvider = serviceProvider;
 
         var activeProviders = GetCommandProviders();
-        var allProviderSettings = _settings.ProviderSettings;
 
         foreach (var item in activeProviders)
         {
             var providerSettings = settings.GetProviderSettings(item);
-
             var settingsModel = new ProviderSettingsViewModel(item, providerSettings, _serviceProvider);
             CommandProviders.Add(settingsModel);
 
@@ -161,14 +163,28 @@ public partial class SettingsViewModel : INotifyPropertyChanged
             {
                 foreach (var fallback in item.FallbackItems)
                 {
-                    FallbackSettings fallbackSettings = new();
-                    if (providerSettings.FallbackCommands.TryGetValue(fallback.IdFromModel, out var existingSettings))
+                    var id = fallback.IdFromModel;
+
+                    // If the underlying command still has no Id (should be rare now), skip registering until it gets one.
+                    if (string.IsNullOrEmpty(id))
                     {
-                        fallbackSettings = existingSettings;
+                        continue;
                     }
 
-                    var fallbackSettingsModel = new FallbackSettingsViewModel(fallback, fallbackSettings, item, settingsModel, _serviceProvider);
-                    FallbackCommands.Add(fallbackSettingsModel);
+                    if (!providerSettings.FallbackCommands.TryGetValue(id, out var existingSettings))
+                    {
+                        existingSettings = new FallbackSettings();
+                    }
+
+                    var fallbackSettingsModel = new FallbackSettingsViewModel(fallback, existingSettings, settingsModel, _serviceProvider);
+                    if (fallbackSettingsModel.IsEnabled)
+                    {
+                        EnabledFallbackCommands.Add(fallbackSettingsModel);
+                    }
+                    else
+                    {
+                        DisabledFallbackCommands.Add(fallbackSettingsModel);
+                    }
                 }
             }
         }
@@ -177,8 +193,24 @@ public partial class SettingsViewModel : INotifyPropertyChanged
     private IEnumerable<CommandProviderWrapper> GetCommandProviders()
     {
         var manager = _serviceProvider.GetService<TopLevelCommandManager>()!;
-        var allProviders = manager.CommandProviders;
-        return allProviders;
+        return manager.CommandProviders;
+    }
+
+    // ReorderFallbacks is called after the UI collection has been reordered.
+    // Assign descending WeightBoost values (highest priority = largest boost) once,
+    // then persist settings.
+    public void ReorderFallbacks(FallbackSettingsViewModel droppedCommand, List<FallbackSettingsViewModel> allFallbacks)
+    {
+        // Highest weight to first item
+        var weight = allFallbacks.Count;
+        foreach (var f in allFallbacks)
+        {
+            // Each setter persists WeightBoost on the underlying FallbackSettings object
+            f.WeightBoost = weight--;
+        }
+
+        Save();
+        WeakReferenceMessenger.Default.Send<ReloadCommandsMessage>(new());
     }
 
     private void Save() => SettingsModel.SaveSettings(_settings);

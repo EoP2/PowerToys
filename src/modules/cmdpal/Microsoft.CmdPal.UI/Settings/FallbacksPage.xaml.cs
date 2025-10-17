@@ -8,6 +8,7 @@ using Microsoft.CmdPal.UI.ViewModels;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
+using Windows.ApplicationModel.DataTransfer;
 
 namespace Microsoft.CmdPal.UI.Settings;
 
@@ -32,6 +33,19 @@ public sealed partial class FallbacksPage : Page
             if (card.DataContext is ProviderSettingsViewModel vm)
             {
                 WeakReferenceMessenger.Default.Send<NavigateToExtensionSettingsMessage>(new(vm));
+            }
+        }
+    }
+
+    private void ListView_DragItemsCompleted(ListViewBase sender, DragItemsCompletedEventArgs args)
+    {
+        if (args.DropResult == DataPackageOperation.Move &&
+            args.Items.Count > 0)
+        {
+            var item = args.Items[0];
+            if (item is FallbackSettingsViewModel droppedCommand)
+            {
+                viewModel?.ReorderFallbacks(droppedCommand, sender.Items.Cast<FallbackSettingsViewModel>().ToList());
             }
         }
     }

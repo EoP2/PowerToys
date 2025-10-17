@@ -131,10 +131,10 @@
                                                         </cpcontrols:ContentIcon.Content>
                                                     </cpcontrols:ContentIcon>
                                                 </controls:SettingsCard.HeaderIcon>
-                                                
+
                                                 <!--  Content goes here  -->
                                                 <ToggleSwitch IsOn="{x:Bind IsEnabled, Mode=TwoWay}" />
-                                                
+
                                             </controls:SettingsCard>
                                         </DataTemplate>
                                     </ItemsRepeater.ItemTemplate>

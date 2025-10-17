@@ -18,8 +18,10 @@ internal sealed partial class FallbackWindowsSettingsItem : FallbackCommandItem
     private readonly string _title = Resources.settings_fallback_title;
     private readonly string _subtitle = Resources.settings_fallback_subtitle;
 
+    private const string _stableId = "com.microsoft.cmdpal.builtin.windows.settings.fallback";
+
     public FallbackWindowsSettingsItem(Classes.WindowsSettings windowsSettings)
-        : base(new NoOpCommand() { Id = "com.microsoft.cmdpal.builtin.windows.settings.fallback" }, Resources.settings_title)
+        : base(new NoOpCommand() { Id = _stableId }, Resources.settings_title)
     {
         Icon = Icons.WindowsSettingsIcon;
         _windowsSettings = windowsSettings;
@@ -27,7 +29,7 @@ internal sealed partial class FallbackWindowsSettingsItem : FallbackCommandItem
 
     public override void UpdateQuery(string query)
     {
-        Command = new NoOpCommand();
+        Command = new NoOpCommand() { Id = _stableId };
         Title = string.Empty;
         Subtitle = string.Empty;
         Icon = null;
@@ -61,6 +63,7 @@ internal sealed partial class FallbackWindowsSettingsItem : FallbackCommandItem
             {
                 Icon = Icons.WindowsSettingsIcon,
                 Name = setting.Name,
+                Id = _stableId,
             };
 
             // There is a case with MMC snap-ins where we don't have .msc files fort them. Then we need to show the note for this results in subtitle too.

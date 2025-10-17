@@ -26,34 +26,74 @@
                     HorizontalAlignment="Stretch"
                     Spacing="{StaticResource SettingsCardSpacing}">
 
-                    <ItemsRepeater ItemsSource="{x:Bind viewModel.FallbackCommands, Mode=OneWay}" Layout="{StaticResource VerticalStackLayout}">
-                        <ItemsRepeater.ItemTemplate>
+                    <ListView
+                        AllowDrop="True"
+                        CanDragItems="True"
+                        CanReorderItems="True"
+                        MaxWidth="1000"
+                        HorizontalAlignment="Stretch"
+                        DragItemsCompleted ="ListView_DragItemsCompleted"
+                        ItemsSource="{x:Bind viewModel.EnabledFallbackCommands, Mode=OneWay}"
+                        SelectionMode="None">
+                        <ListView.ItemTemplate>
                             <DataTemplate x:DataType="viewModels:FallbackSettingsViewModel">
-                                <controls:SettingsCard
-                                    Click="SettingsCard_Click"
-                                    DataContext="{x:Bind}"
-                                    Description="{x:Bind Subtitle, Mode=OneWay}"
-                                    Header="{x:Bind DisplayName, Mode=OneWay}"
-                                    IsClickEnabled="True">
-                                    <controls:SettingsCard.HeaderIcon>
-                                        <cpcontrols:ContentIcon>
-                                            <cpcontrols:ContentIcon.Content>
-                                                <cpcontrols:IconBox
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto" />
+                                        <ColumnDefinition Width="*" />
+                                    </Grid.ColumnDefinitions>
+
+                                    <Border Width="18"
+                                        Margin="1,1,0,1"
+                                        Padding="0"
+                                        VerticalAlignment="Stretch"
+                                        Background="{ThemeResource CardBackgroundFillColorDefaultBrush}"
+                                        CornerRadius="{ThemeResource ControlCornerRadius}">
+                                        <TextBlock HorizontalAlignment="Center"
+                                           VerticalAlignment="Center"
+                                           FontFamily="Segoe UI Symbol"
+                                           FontSize="16"
+                                           Foreground="{ThemeResource TextFillColorSecondaryBrush}"
+                                           Opacity="0.5"
+                                           Text="&#x283F;" />
+                                    </Border>
+
+                                    <controls:SettingsExpander
+                                        Grid.Column="1"
+                                        MaxWidth="950"
+                                        DataContext="{x:Bind}"
+                                        Description="{x:Bind ExtensionName, Mode=OneWay}"
+                                        Header="{x:Bind DisplayName, Mode=OneWay}">
+
+                                        <controls:SettingsExpander.HeaderIcon>
+                                            <cpcontrols:ContentIcon>
+                                                <cpcontrols:ContentIcon.Content>
+                                                    <cpcontrols:IconBox
                                                     Width="20"
                                                     Height="20"
                                                     AutomationProperties.AccessibilityView="Raw"
                                                     SourceKey="{x:Bind Icon, Mode=OneWay}"
                                                     SourceRequested="{x:Bind helpers:IconCacheProvider.SourceRequested}" />
-                                            </cpcontrols:ContentIcon.Content>
-                                        </cpcontrols:ContentIcon>
-                                    </controls:SettingsCard.HeaderIcon>
+                                                </cpcontrols:ContentIcon.Content>
+                                            </cpcontrols:ContentIcon>
+                                        </controls:SettingsExpander.HeaderIcon>
 
-                                    <ToggleSwitch IsOn="{x:Bind IsEnabled, Mode=TwoWay}" />
+                                        <ToggleSwitch IsOn="{x:Bind IsEnabled, Mode=TwoWay}" />
 
-                                </controls:SettingsCard>
+                                        <!--  Content goes here  -->
+
+                                        <controls:SettingsExpander.Items>
+
+                                            <controls:SettingsCard x:Uid="Settings_FallbacksPage_GlobalResults_SettingsCard" HeaderIcon="{ui:FontIcon Glyph=&#xE8AC;}" />
+
+                                        </controls:SettingsExpander.Items>
+                                    </controls:SettingsExpander>
+
+                                </Grid>
+
                             </DataTemplate>
-                        </ItemsRepeater.ItemTemplate>
-                    </ItemsRepeater>
+                        </ListView.ItemTemplate>
+                    </ListView>
                 </StackPanel>
             </Grid>
         </ScrollViewer>

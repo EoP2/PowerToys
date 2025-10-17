@@ -2,9 +2,16 @@
 // The Microsoft Corporation licenses this file to you under the MIT license.
 // See the LICENSE file in the project root for more information.
 
+using System;
+using System.Collections.Generic;
+using System.Globalization;
+using System.Text;
+using System.Threading;
 using Microsoft.CmdPal.Ext.WebSearch.Commands;
 using Microsoft.CmdPal.Ext.WebSearch.Helpers;
 using Microsoft.CmdPal.Ext.WebSearch.Properties;
+using Microsoft.CommandPalette.Extensions;
+using Microsoft.CommandPalette.Extensions.Toolkit;
 using BrowserInfo = Microsoft.CmdPal.Ext.WebSearch.Helpers.DefaultBrowserInfo;
 
 namespace Microsoft.CmdPal.Ext.WebSearch.Pages;
