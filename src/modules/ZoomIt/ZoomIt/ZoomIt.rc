@@ -119,24 +119,24 @@ EXSTYLE WS_EX_CONTROLPARENT
 CAPTION "ZoomIt - Sysinternals: www.sysinternals.com"
 FONT 8, "MS Shell Dlg", 0, 0, 0x0
 BEGIN
-    DEFPUSHBUTTON   "OK",IDOK,166,306,50,14
-    PUSHBUTTON      "Cancel",IDCANCEL,223,306,50,14
+    DEFPUSHBUTTON   "确定",IDOK,166,306,50,14
+    PUSHBUTTON      "取消",IDCANCEL,223,306,50,14
     LTEXT           "ZoomIt v9.10",IDC_VERSION,42,7,73,10
-    LTEXT           "Copyright � 2006-2025 Mark Russinovich",IDC_COPYRIGHT,42,17,231,8
+    LTEXT           "Copyright ?2006-2025 Mark Russinovich",IDC_COPYRIGHT,42,17,231,8
     CONTROL         "<a HREF=""https://www.sysinternals.com"">Sysinternals - www.sysinternals.com</a>",IDC_LINK,
                     "SysLink",WS_TABSTOP,42,26,150,9
     ICON            "APPICON",IDC_STATIC,12,9,20,20
-    CONTROL         "Show tray icon",IDC_SHOW_TRAY_ICON,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,13,295,105,10
+    CONTROL         "显示托盘图标",IDC_SHOW_TRAY_ICON,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,13,295,105,10
     CONTROL         "",IDC_TAB,"SysTabControl32",TCS_MULTILINE | WS_TABSTOP,8,46,265,245
-    CONTROL         "Run ZoomIt when Windows starts",IDC_AUTOSTART,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,13,309,122,10
+    CONTROL         "在 Windows 启动时运行 ZoomIt",IDC_AUTOSTART,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,13,309,122,10
 END
 
 ADVANCED_BREAK DIALOGEX 0, 0, 209, 219
 STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | DS_CENTER | WS_POPUP | WS_CAPTION | WS_SYSMENU
-CAPTION "Advanced Break Options"
+CAPTION "高级中断选项"
 FONT 8, "MS Shell Dlg", 400, 0, 0x1
 BEGIN
-    CONTROL         "Play Sound on Expiration:",IDC_CHECK_SOUND_FILE,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,3,11,98,10,WS_EX_RIGHT
+    CONTROL         "过期时播放声音：",IDC_CHECK_SOUND_FILE,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,3,11,98,10,WS_EX_RIGHT
     EDITTEXT        IDC_SOUND_FILE,61,38,125,12,ES_AUTOHSCROLL | ES_READONLY
     PUSHBUTTON      "&...",IDC_SOUND_BROWSE,187,38,13,11
     COMBOBOX        IDC_OPACITY,62,58,38,30,CBS_DROPDOWNLIST | WS_VSCROLL | WS_TABSTOP
@@ -149,20 +149,20 @@ BEGIN
     CONTROL         "",IDC_TIMER_POS7,"Button",BS_AUTORADIOBUTTON,63,108,10,10
     CONTROL         "",IDC_TIMER_POS8,"Button",BS_AUTORADIOBUTTON,79,108,10,10
     CONTROL         "",IDC_TIMER_POS9,"Button",BS_AUTORADIOBUTTON,97,108,10,10
-    CONTROL         "Show background bitmap:",IDC_CHECK_BACKGROUND_FILE,
+    CONTROL         "显示背景位图：",IDC_CHECK_BACKGROUND_FILE,
                     "Button",BS_AUTOCHECKBOX | WS_TABSTOP,3,122,99,10,WS_EX_RIGHT
-    CONTROL         "Use faded desktop as background",IDC_STATIC_DESKTOP_BACKGROUND,
+    CONTROL         "将淡出的桌面用作背景",IDC_STATIC_DESKTOP_BACKGROUND,
                     "Button",BS_AUTORADIOBUTTON | WS_GROUP | WS_TABSTOP,46,135,125,10
-    CONTROL         "Use image file as background",IDC_STATIC_BACKGROUND_FILE,
+    CONTROL         "使用图像文件作为背景",IDC_STATIC_BACKGROUND_FILE,
                     "Button",BS_AUTORADIOBUTTON | WS_TABSTOP,46,149,109,10
     EDITTEXT        IDC_BACKGROUND_FILE,62,164,125,12,ES_AUTOHSCROLL | ES_READONLY
     PUSHBUTTON      "&...",IDC_BACKGROUND_BROWSE,188,164,13,11
-    CONTROL         "Scale to screen:",IDC_CHECK_BACKGROUND_STRETCH,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,58,180,67,10,WS_EX_RIGHT
+    CONTROL         "缩放至屏幕：",IDC_CHECK_BACKGROUND_STRETCH,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,58,180,67,10,WS_EX_RIGHT
     DEFPUSHBUTTON   "OK",IDOK,97,201,50,14
     PUSHBUTTON      "Cancel",IDCANCEL,150,201,50,14
-    LTEXT           "Alarm Sound File:",IDC_STATIC_SOUND_FILE,61,26,56,8
-    LTEXT           "Timer Opacity:",IDC_STATIC,8,59,48,8
-    LTEXT           "Timer Position:",IDC_STATIC,8,77,48,8
+    LTEXT           "闹钟声音文件：",IDC_STATIC_SOUND_FILE,61,26,56,8
+    LTEXT           "计时器不透明度：",IDC_STATIC,8,59,48,8
+    LTEXT           "计时器位置：",IDC_STATIC,8,77,48,8
     CONTROL         "",IDC_STATIC,"Static",SS_BLACKFRAME | SS_SUNKEN,7,196,193,1,WS_EX_CLIENTEDGE
 END
 
@@ -171,37 +171,37 @@ STYLE DS_SETFONT | DS_FIXEDSYS | DS_CONTROL | WS_CHILD | WS_CLIPSIBLINGS | WS_SY
 FONT 8, "MS Shell Dlg", 400, 0, 0x1
 BEGIN
     CONTROL         "",IDC_HOTKEY,"msctls_hotkey32",WS_BORDER | WS_TABSTOP,59,57,80,12
-    LTEXT           "After toggling ZoomIt you can zoom in with the mouse wheel or up and down arrow keys. Exit zoom mode with Escape or by pressing the right mouse button.",IDC_STATIC,7,6,246,26
-    LTEXT           "Zoom Toggle:",IDC_STATIC,7,59,51,8
+    LTEXT           "切换 ZoomIt 后，可以使用鼠标滚轮或向上和向下箭头键进行放大。使用 Esc 或按鼠标右键退出缩放模式。",IDC_STATIC,7,6,246,26
+    LTEXT           "缩放切换：",IDC_STATIC,7,59,51,8
     CONTROL         "",IDC_ZOOM_SLIDER,"msctls_trackbar32",TBS_AUTOTICKS | TBS_BOTH | TBS_NOTICKS | WS_TABSTOP,53,118,150,15,WS_EX_TRANSPARENT
-    LTEXT           "Specify the initial level of magnification when zooming in:",IDC_STATIC,7,105,215,10
+    LTEXT           "在放大时指定初始放大级别：",IDC_STATIC,7,105,215,10
     LTEXT           "1.25",IDC_STATIC,52,136,16,8
     LTEXT           "1.5",IDC_STATIC,82,136,12,8
     LTEXT           "1.75",IDC_STATIC,108,136,16,8
     LTEXT           "2.0",IDC_STATIC,138,136,12,8
     LTEXT           "3.0",IDC_STATIC,164,136,12,8
     LTEXT           "4.0",IDC_STATIC,190,136,12,8
-    CONTROL         "Animate zoom in and zoom out:",IDC_ANIMATE_ZOOM,"Button",BS_AUTOCHECKBOX | BS_LEFTTEXT | WS_TABSTOP,7,74,116,10
-    CONTROL         "Smooth zoomed image:",IDC_SMOOTH_IMAGE,"Button",BS_AUTOCHECKBOX | BS_LEFTTEXT | WS_TABSTOP,7,88,116,10
-    LTEXT           "Copy a zoomed screen with Ctrl+C or save it by typing Ctrl+S. Crop the copy or save region by entering Ctrl+Shift instead of Ctrl.",IDC_STATIC,7,148,246,17
-    LTEXT           "Copy a zoomed screen with Ctrl+C or save it by typing Ctrl+S. Crop the copy or save region by entering Ctrl+Shift instead of Ctrl.",IDC_STATIC,6,34,246,18
+    CONTROL         "动画缩放：",IDC_ANIMATE_ZOOM,"Button",BS_AUTOCHECKBOX | BS_LEFTTEXT | WS_TABSTOP,7,74,116,10
+    CONTROL         "平滑缩放图像：",IDC_SMOOTH_IMAGE,"Button",BS_AUTOCHECKBOX | BS_LEFTTEXT | WS_TABSTOP,7,88,116,10
+    LTEXT           "复制带有 Ctrl+C 的缩放屏幕，或通过键入 Ctrl+S 进行保存。通过输入 Ctrl+Shift 而不是 Ctrl 来裁剪副本或保存区域。",IDC_STATIC,7,148,246,17
+    LTEXT           "复制带有 Ctrl+C 的缩放屏幕，或通过键入 Ctrl+S 进行保存。通过输入 Ctrl+Shift 而不是 Ctrl 来裁剪副本或保存区域。",IDC_STATIC,6,34,246,18
 END
 
 DRAW DIALOGEX 0, 0, 260, 228
 STYLE DS_SETFONT | DS_FIXEDSYS | DS_CONTROL | WS_CHILD | WS_SYSMENU
 FONT 8, "MS Shell Dlg", 400, 0, 0x1
 BEGIN
-    LTEXT           "Once zoomed, toggle drawing mode by pressing the left mouse button. Undo with Ctrl+Z and all drawing by pressing E. Center the cursor with the space bar. Exit drawing mode by pressing the right mouse button.",IDC_STATIC,7,7,246,24
-    LTEXT           "Pen Control ",IDC_PEN_CONTROL,7,38,40,8
-    LTEXT           "Change the pen width by pressing left Ctrl and using the mouse wheel or the up and down arrow keys.",IDC_STATIC,19,48,233,16
-    LTEXT           "Colors",IDC_COLORS,7,70,21,8
-    LTEXT           "Change the pen color by pressing R (red), G (green), B (blue),\nO (orange), Y (yellow) or P (pink).",IDC_STATIC,19,80,233,16
-    LTEXT           "Highlight and Blur",IDC_HIGHLIGHT_AND_BLUR,7,102,58,8
-    LTEXT           "Hold Shift while pressing a color key for a translucent highlighter color. Press X for blur or Shift+X for a stronger blur.",IDC_STATIC,19,113,233,16
-    LTEXT           "Shapes",IDC_SHAPES,7,134,23,8
-    LTEXT           "Draw a line by holding down the Shift key, a rectangle with the Ctrl key, an ellipse with the Tab key and an arrow with Shift+Ctrl.",IDC_STATIC,19,144,233,16
-    LTEXT           "Screen",IDC_SCREEN,7,166,22,8
-    LTEXT           "Clear the screen for a sketch pad by pressing W (white) or K (black). Copy a zoomed screen with Ctrl+C or save it by typing Ctrl+S. Crop the copy or save region by entering Ctrl+Shift instead of Ctrl.",IDC_STATIC,19,176,233,24
+    LTEXT           "缩放后，按鼠标左键切换绘图模式。按 E 可使用 Ctrl+Z 和所有绘图撤消。将光标居中，空格键。按鼠标右键退出绘图模式。",IDC_STATIC,7,7,246,24
+    LTEXT           "笔划控制",IDC_PEN_CONTROL,7,38,40,8
+    LTEXT           "通过按左 Ctrl 和使用鼠标滚轮或向上键和向下箭头键更改笔宽度。",IDC_STATIC,19,48,233,16
+    LTEXT           "颜色",IDC_COLORS,7,70,21,8
+    LTEXT           "按 R (红色)、G (绿色)、B (蓝色)、O (橙色)、Y (黄色) 或 P (粉色) 更改笔划颜色。",IDC_STATIC,19,80,233,16
+    LTEXT           "突出显示和模糊",IDC_HIGHLIGHT_AND_BLUR,7,102,58,8
+    LTEXT           "按下半透明荧光笔颜色的颜色键时按住 Shift 键。按 X 进行模糊或 Shift+X 以获得更强的模糊度。",IDC_STATIC,19,113,233,16
+    LTEXT           "形状",IDC_SHAPES,7,134,23,8
+    LTEXT           "按住 Shift 键、带 Ctrl 键的矩形、带 Tab 键的椭圆和带 Shift+Ctrl 的箭头来绘制线条。",IDC_STATIC,19,144,233,16
+    LTEXT           "屏幕",IDC_SCREEN,7,166,22,8
+    LTEXT           "按 W (白色) 或 K (实心) 清除草图板的屏幕。复制带有 Ctrl+C 的缩放屏幕，或通过键入 Ctrl+S 进行保存。通过输入 Ctrl+Shift 而不是 Ctrl 来裁剪副本或保存区域。",IDC_STATIC,19,176,233,24
     CONTROL         "",IDC_DRAW_HOTKEY,"msctls_hotkey32",WS_BORDER | WS_TABSTOP,73,207,80,12
     LTEXT           "Draw w/out Zoom:",IDC_STATIC,7,210,63,11
 END
@@ -210,8 +210,8 @@ TYPE DIALOGEX 0, 0, 260, 104
 STYLE DS_SETFONT | DS_FIXEDSYS | DS_CONTROL | WS_CHILD | WS_SYSMENU
 FONT 8, "MS Shell Dlg", 400, 0, 0x1
 BEGIN
-    LTEXT           "Once in drawing mode, type 't' to enter typing mode or shift+'t' to enter typing mode with right-aligned input. Exit typing mode by pressing escape or the left mouse button. Use the mouse wheel or up and down arrow keys to change the font size.",IDC_STATIC,7,7,246,32
-    LTEXT           "The text color is the current drawing color.",IDC_STATIC,7,47,211,9
+    LTEXT           "进入绘图模式后，键入“t”以进入键入模式，或 shift+“t”以进入右对齐输入的键入模式。按 Esc 或鼠标左键退出键入模式。使用鼠标滚轮或上下箭头键更改字号。",IDC_STATIC,7,7,246,32
+    LTEXT           "文本颜色是当前绘图颜色。",IDC_STATIC,7,47,211,9
     PUSHBUTTON      "&Font",IDC_FONT,112,69,41,14
     GROUPBOX        "Text Font",IDC_TEXT_FONT,8,61,99,28
 END
@@ -223,13 +223,13 @@ BEGIN
     CONTROL         "",IDC_BREAK_HOTKEY,"msctls_hotkey32",WS_BORDER | WS_TABSTOP,52,67,80,12
     EDITTEXT        IDC_TIMER,31,86,31,13,ES_RIGHT | ES_AUTOHSCROLL | ES_NUMBER
     CONTROL         "",IDC_SPIN_TIMER,"msctls_updown32",UDS_SETBUDDYINT | UDS_ALIGNRIGHT | UDS_AUTOBUDDY | UDS_ARROWKEYS | UDS_NOTHOUSANDS,45,86,11,12
-    LTEXT           "minutes",IDC_STATIC,67,88,25,8
-    PUSHBUTTON      "&Advanced",IDC_ADVANCED_BREAK,212,102,41,14
-    LTEXT           "Enter timer mode by using the ZoomIt tray icon's Break menu item. Increase and decrease time with the arrow keys. If you Alt-Tab away from the timer window, reactivate it by left-clicking on the ZoomIt tray icon. Exit timer mode with Escape. ",IDC_STATIC,7,7,246,33
-    LTEXT           "Start Timer:",IDC_STATIC,7,70,39,8
-    LTEXT           "Timer:",IDC_STATIC,7,88,20,8
-    LTEXT           "Change the break timer color using the same keys that the drawing color. The break timer font is the same as text font.",IDC_STATIC,7,45,219,20
-    CONTROL         "Show Time Elapsed After Expiration:",IDC_CHECK_SHOW_EXPIRED,
+    LTEXT           "分钟",IDC_STATIC,67,88,25,8
+    PUSHBUTTON      "高级(&A))&A",IDC_ADVANCED_BREAK,212,102,41,14
+    LTEXT           "使用 ZoomIt 托盘图标的 Break 菜单项进入计时器模式。使用箭头键增加和减少时间。如果 Alt-Tab 离开计时器窗口，请通过在 ZoomIt 托盘图标上左键单击来重新激活它。退出带 Esc 的计时器模式。",IDC_STATIC,7,7,246,33
+    LTEXT           "启动计时器：",IDC_STATIC,7,70,39,8
+    LTEXT           "计时器：",IDC_STATIC,7,88,20,8
+    LTEXT           "使用与绘图颜色相同的键更改休息时间计时器颜色。休息时间计时器字体与文本字体相同。",IDC_STATIC,7,45,219,20
+    CONTROL         "显示到期后经过的时间：",IDC_CHECK_SHOW_EXPIRED,
                     "Button",BS_AUTOCHECKBOX | BS_LEFTTEXT | WS_TABSTOP,8,104,132,10
 END
 
@@ -238,15 +238,15 @@ STYLE DS_SETFONT | DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
 CAPTION "ZoomIt Font"
 FONT 8, "MS Shell Dlg", 0, 0, 0x0
 BEGIN
-    LTEXT           "&Font:",1088,6,0,40,9
+    LTEXT           "字体(&F)",1088,6,0,40,9
     COMBOBOX        1136,6,10,94,64,CBS_SIMPLE | CBS_OWNERDRAWFIXED | CBS_AUTOHSCROLL | CBS_SORT | CBS_HASSTRINGS | CBS_DISABLENOSCROLL | WS_VSCROLL | WS_TABSTOP
     LTEXT           "Font St&yle:",1089,108,0,44,9
     COMBOBOX        1137,108,10,64,64,CBS_SIMPLE | CBS_DISABLENOSCROLL | WS_VSCROLL | WS_TABSTOP
-    LTEXT           "&Size:",1090,179,0,30,9
+    LTEXT           "大小(&S)：",1090,179,0,30,9
     COMBOBOX        1138,179,10,32,64,CBS_SIMPLE | CBS_OWNERDRAWFIXED | CBS_SORT | CBS_HASSTRINGS | CBS_DISABLENOSCROLL | WS_VSCROLL | WS_TABSTOP
-    DEFPUSHBUTTON   "OK",IDOK,166,94,45,14,WS_GROUP
-    PUSHBUTTON      "Cancel",IDCANCEL,166,111,45,14,WS_GROUP
-    GROUPBOX        "Sample",1073,7,75,143,51,WS_GROUP
+    DEFPUSHBUTTON   "确定",IDOK,166,94,45,14,WS_GROUP
+    PUSHBUTTON      "取消",IDCANCEL,166,111,45,14,WS_GROUP
+    GROUPBOX        "示例",1073,7,75,143,51,WS_GROUP
     CTEXT           "AaBbYyZz",1092,16,88,127,31,SS_NOPREFIX | NOT WS_VISIBLE
 END
 
@@ -255,11 +255,11 @@ STYLE DS_SETFONT | DS_FIXEDSYS | DS_CONTROL | WS_CHILD | WS_SYSMENU
 FONT 8, "MS Shell Dlg", 400, 0, 0x1
 BEGIN
     CONTROL         "",IDC_LIVE_HOTKEY,"msctls_hotkey32",WS_BORDER | WS_TABSTOP,69,108,80,12
-    LTEXT           "LiveZoom mode is supported on Windows 7 and higher where window updates show while zoomed. ",IDC_STATIC,7,7,246,18
-    LTEXT           "LiveZoom Toggle:",IDC_STATIC,7,110,62,8
-    LTEXT           "To enter and exit LiveZoom, enter the hotkey specified below.",IDC_STATIC,7,94,218,13
-    LTEXT           "Note that in LiveZoom you must use Ctrl+Up and Ctrl+Down to control the zoom level. To enter drawing mode, use the standard zoom-without-draw hotkey and then escape to go back to LiveZoom.",IDC_STATIC,7,30,246,27
-    LTEXT           "Use LiveDraw to draw and annotate the live desktop. To activate LiveDraw, enter the hotkey with the Shift key in the opposite mode. You can remove LiveDraw annotations by activating LiveDraw and enter the escape key",IDC_STATIC,7,62,246,32
+    LTEXT           "LiveZoom 模式在 Windows 7 及更高版本上受支持，在该模式下，缩放时会显示窗口更新。 ",IDC_STATIC,7,7,246,18
+    LTEXT           "实时缩放切换：",IDC_STATIC,7,110,62,8
+    LTEXT           "若要进入并退出 LiveZoom，请输入下面指定的热键。",IDC_STATIC,7,94,218,13
+    LTEXT           "请注意，在 LiveZoom 中，必须使用 Ctrl+上 和 Ctrl+下 控制缩放级别。若要进入绘图模式，请使用标准的缩放-不绘制热键，然后转义以返回到 LiveZoom。",IDC_STATIC,7,30,246,27
+    LTEXT           "使用 LiveDraw 绘制并批注实时桌面。若要激活 LiveDraw，请在相反模式下输入 Shift 键的热键。可通过激活 LiveDraw 删除 LiveDraw 注释并输入转义键。",IDC_STATIC,7,62,246,32
 END
 
 RECORD DIALOGEX 0, 0, 260, 169
@@ -267,18 +267,18 @@ STYLE DS_SETFONT | DS_FIXEDSYS | DS_CONTROL | WS_CHILD | WS_SYSMENU
 FONT 8, "MS Shell Dlg", 400, 0, 0x1
 BEGIN
     CONTROL         "",IDC_RECORD_HOTKEY,"msctls_hotkey32",WS_BORDER | WS_TABSTOP,61,96,80,12
-    LTEXT           "Record Toggle:",IDC_STATIC,7,98,54,8
-    LTEXT           "Record video of the unzoomed live screen or a static zoomed session by entering the recording hot key and finish the recording by entering it again. ",IDC_STATIC,7,7,246,28
-    LTEXT           "Note: Recording is only available on Windows 10 (version 1903) and higher.",IDC_STATIC,7,77,246,19
-    LTEXT           "Scaling:",IDC_STATIC,30,115,26,8
+    LTEXT           "录制切换：",IDC_STATIC,7,98,54,8
+    LTEXT           "通过输入录制热键，通过重新输入录制热键来录制未缩放的实时屏幕或静态缩放会话的视频并完成录制。 ",IDC_STATIC,7,7,246,28
+    LTEXT           "注意：录制仅适用于 Windows 10（版本 1903）及更高版本。",IDC_STATIC,7,77,246,19
+    LTEXT           "缩放：",IDC_STATIC,30,115,26,8
     COMBOBOX        IDC_RECORD_SCALING,61,114,26,30,CBS_DROPDOWNLIST | CBS_AUTOHSCROLL | CBS_OEMCONVERT | CBS_SORT | WS_VSCROLL | WS_TABSTOP
-    LTEXT           "Frame Rate:",IDC_STATIC,119,115,44,8,NOT WS_VISIBLE
+    LTEXT           "帧率：",IDC_STATIC,119,115,44,8,NOT WS_VISIBLE
     COMBOBOX        IDC_RECORD_FRAME_RATE,166,114,42,30,CBS_DROPDOWNLIST | CBS_AUTOHSCROLL | CBS_OEMCONVERT | CBS_SORT | NOT WS_VISIBLE | WS_VSCROLL | WS_TABSTOP
-    LTEXT           "To crop the portion of the screen that will be recorded, enter the hotkey with the Shift key in the opposite mode. ",IDC_STATIC,7,32,246,19
-    LTEXT           "To record a specific window, enter the hotkey with the Alt key in the opposite mode.",IDC_STATIC,7,55,246,19
-    CONTROL         "&Capture audio input:",IDC_CAPTURE_AUDIO,"Button",BS_AUTOCHECKBOX | BS_LEFTTEXT | WS_TABSTOP,7,137,83,10
+    LTEXT           "若要裁剪将录制的屏幕部分，请在相反模式下输入带有 Shift 键的热键。 ",IDC_STATIC,7,32,246,19
+    LTEXT           "若要录制特定窗口，请在相反模式下输入带有 Alt 键的热键。",IDC_STATIC,7,55,246,19
+    CONTROL         "捕获音频输入(&C)",IDC_CAPTURE_AUDIO,"Button",BS_AUTOCHECKBOX | BS_LEFTTEXT | WS_TABSTOP,7,137,83,10
     COMBOBOX        IDC_MICROPHONE,81,152,172,30,CBS_DROPDOWNLIST | WS_VSCROLL | WS_TABSTOP
-    LTEXT           "Microphone:",IDC_STATIC,32,154,47,8
+    LTEXT           "麦克风：",IDC_STATIC,32,154,47,8
 END
 
 SNIP DIALOGEX 0, 0, 260, 68
@@ -286,8 +286,8 @@ STYLE DS_SETFONT | DS_FIXEDSYS | DS_CONTROL | WS_CHILD | WS_CLIPSIBLINGS | WS_SY
 FONT 8, "MS Shell Dlg", 400, 0, 0x1
 BEGIN
     CONTROL         "",IDC_SNIP_HOTKEY,"msctls_hotkey32",WS_BORDER | WS_TABSTOP,55,32,80,12
-    LTEXT           "Snip Toggle:",IDC_STATIC,7,33,45,8
-    LTEXT           "Copy a region of the screen to the clipboard or enter the hotkey with the Shift key in the opposite mode to save it to a file. ",IDC_STATIC,7,7,246,19
+    LTEXT           "截图切换：",IDC_STATIC,7,33,45,8
+    LTEXT           "将屏幕区域复制到剪贴板，或在相反模式下输入带有 Shift 键的热键以将其保存到文件。 ",IDC_STATIC,7,7,246,19
 END
 
 DEMOTYPE DIALOGEX 0, 0, 259, 249
@@ -295,23 +295,23 @@ STYLE DS_SETFONT | DS_FIXEDSYS | DS_CONTROL | WS_CHILD | WS_CLIPSIBLINGS | WS_SY
 FONT 8, "MS Shell Dlg", 400, 0, 0x1
 BEGIN
     CONTROL         "",IDC_DEMOTYPE_HOTKEY,"msctls_hotkey32",WS_BORDER | WS_TABSTOP,74,154,80,12
-    LTEXT           "DemoType toggle:",IDC_STATIC,7,157,63,8
+    LTEXT           "DemoType 切换：",IDC_STATIC,7,157,63,8
     PUSHBUTTON      "&...",IDC_DEMOTYPE_BROWSE,231,137,16,13
     CONTROL         "",IDC_DEMOTYPE_SPEED_SLIDER,"msctls_trackbar32",TBS_AUTOTICKS | TBS_BOTH | TBS_NOTICKS | WS_TABSTOP,52,202,150,11,WS_EX_TRANSPARENT
     CONTROL         "Drive input with typing:",IDC_DEMOTYPE_USER_DRIVEN,
                     "Button",BS_AUTOCHECKBOX | BS_LEFTTEXT | WS_TABSTOP,7,173,88,10
-    LTEXT           "DemoType typing speed:",IDC_STATIC,7,189,215,10
-    LTEXT           "Slow",IDC_DEMOTYPE_STATIC1,51,213,18,8
-    LTEXT           "Fast",IDC_DEMOTYPE_STATIC2,186,213,17,8
+    LTEXT           "DemoType 键入速度：",IDC_STATIC,7,189,215,10
+    LTEXT           "慢",IDC_DEMOTYPE_STATIC1,51,213,18,8
+    LTEXT           "快",IDC_DEMOTYPE_STATIC2,186,213,17,8
     EDITTEXT        IDC_DEMOTYPE_FILE,44,137,187,12,ES_AUTOHSCROLL | ES_READONLY
-    LTEXT           "Input file:",IDC_STATIC,7,139,32,8
-    LTEXT           "When you reach the end of the file, ZoomIt will reload the file and start at the beginning. Enter the hotkey with the Shift key in the opposite mode to step back to the last [end].",IDC_STATIC,7,108,248,24
-    LTEXT           "DemoType has ZoomIt type text specified in the input file when you enter the DemoType toggle. Simply separate snippets with the [end] keyword, or you can insert text from the clipboard if it is prefixed with the [start].",IDC_STATIC,7,7,248,24
-    LTEXT           "  - Insert pauses with the [pause:n] keyword where 'n' is seconds. ",IDC_STATIC,19,34,212,11
-    LTEXT           "You can have ZoomIt send text automatically, or select the option to drive input with typing. ZoomIt will block keyboard input while sending output.",IDC_STATIC,7,68,248,16
-    LTEXT           "When driving input, hit the space bar to unblock keyboard input at the end of a snippet. In auto mode, control will be returned upon completion.",IDC_STATIC,7,88,248,16
-    LTEXT           "- Send text via the clipboard with [paste] and [/paste]. ",IDC_STATIC,23,45,178,8
-    LTEXT           "- Send keystrokes with [enter], [up], [down], [left], and [right].",IDC_STATIC,23,56,211,8
+    LTEXT           "输入文件：",IDC_STATIC,7,139,32,8
+    LTEXT           "当到达文件结尾时，ZoomIt 将重新加载文件并从开头开始。在相反模式下输入具有 Shift 键的热键，以返回到最后一个 [end]。",IDC_STATIC,7,108,248,24
+    LTEXT           "输入 DemoType 切换开关时，使用 DemoType 在输入文件中指定 ZoomIt 类型文本。如果剪贴板以 [start] 关键字 (keyword)为前缀，则还可以从剪贴板中拉取输入。",IDC_STATIC,7,7,248,24
+    LTEXT           "  - 将片段与 [end] 关键字 (keyword)分开，并在 “n” 为秒的关键字 (keyword)使用 [pause：n] 将暂停插入到文本输出中。",IDC_STATIC,19,34,212,11
+    LTEXT           "可以自动设置 ZoomIt 发送文本，也可以选择用于通过键入来驱动输入的选项。ZoomIt 将在发送输出时阻止键盘输入。",IDC_STATIC,7,68,248,16
+    LTEXT           "在驱动输入时，按空格键可在片段末尾取消阻止键盘输入。在自动模式下，控件将在完成时返回。",IDC_STATIC,7,88,248,16
+    LTEXT           "- 通过剪贴板发送包含 [paste] 和 [/paste] 的文本。",IDC_STATIC,23,45,178,8
+    LTEXT           "- 使用 [enter]、[up]、[down]、[left] 和 [right] 发送击键。",IDC_STATIC,23,56,211,8
 END
 
 
