@@ -191,7 +191,7 @@ DRAW DIALOGEX 0, 0, 260, 228
 STYLE DS_SETFONT | DS_FIXEDSYS | DS_CONTROL | WS_CHILD | WS_SYSMENU
 FONT 8, "MS Shell Dlg", 400, 0, 0x1
 BEGIN
-    LTEXT           "缩放后，按鼠标左键切换画笔模式。按 E 可使用 Ctrl+Z 和所有画笔撤消。将光标居中，空格键。按鼠标右键退出画笔模式。",IDC_STATIC,7,7,246,24
+    LTEXT           "缩放模式下，按鼠标左键可进入画笔模式。Ctrl+Z 撤销，E键清除，空格键居中光标，鼠标右键退出画笔模式。",IDC_STATIC,7,7,246,24
     LTEXT           "粗细",IDC_PEN_CONTROL,7,38,40,8
     LTEXT           "使用左 Clrt + 鼠标滚轮或上下键调整笔划粗细。",IDC_STATIC,19,48,233,16
     LTEXT           "颜色",IDC_COLORS,7,70,21,8
@@ -220,15 +220,15 @@ BREAK DIALOGEX 0, 0, 260, 123
 STYLE DS_SETFONT | DS_FIXEDSYS | DS_CONTROL | WS_CHILD | WS_SYSMENU
 FONT 8, "MS Shell Dlg", 400, 0, 0x1
 BEGIN
-    CONTROL         "",IDC_BREAK_HOTKEY,"msctls_hotkey32",WS_BORDER | WS_TABSTOP,82,67,80,12
+    CONTROL         "",IDC_BREAK_HOTKEY,"msctls_hotkey32",WS_BORDER | WS_TABSTOP,70,67,80,12
     EDITTEXT        IDC_TIMER,61,86,31,13,ES_RIGHT | ES_AUTOHSCROLL | ES_NUMBER
     CONTROL         "",IDC_SPIN_TIMER,"msctls_updown32",UDS_SETBUDDYINT | UDS_ALIGNRIGHT | UDS_AUTOBUDDY | UDS_ARROWKEYS | UDS_NOTHOUSANDS,75,86,11,12
     LTEXT           "分钟",IDC_STATIC,97,88,25,8
     PUSHBUTTON      "高级(&A)",IDC_ADVANCED_BREAK,212,102,41,14
-    LTEXT           "使用 ZoomIt 托盘图标的 Break 菜单项进入计时器模式。使用箭头键增加和减少时间。如果 Alt-Tab 离开计时器窗口，请通过在 ZoomIt 托盘图标上左键单击来重新激活它。退出带 Esc 的计时器模式。",IDC_STATIC,7,7,246,33
-    LTEXT           "启动计时器：",IDC_STATIC,7,70,39,8
-    LTEXT           "计时器：",IDC_STATIC,7,88,20,8
-    LTEXT           "使用与画笔颜色相同的键更改休息时间计时器颜色。休息时间计时器字体与文本字体相同。",IDC_STATIC,7,45,219,20
+    LTEXT           "方向键可调整时长，ESC键退出。离开计时窗口后，可单击托盘图标激活界面。",IDC_STATIC,7,7,246,33
+    LTEXT           "启动计时器：",IDC_STATIC,7,70,50,8
+    LTEXT           "计时器：",IDC_STATIC,7,88,30,8
+    LTEXT           "更改计时器颜色的快捷键和画笔一致，字体同标注一致。",IDC_STATIC,7,45,219,20
     CONTROL         "倒计时结束后显示超出时长：",IDC_CHECK_SHOW_EXPIRED,
                     "Button",BS_AUTOCHECKBOX | BS_LEFTTEXT | WS_TABSTOP,8,104,132,10
 END
@@ -255,7 +255,7 @@ STYLE DS_SETFONT | DS_FIXEDSYS | DS_CONTROL | WS_CHILD | WS_SYSMENU
 FONT 8, "MS Shell Dlg", 400, 0, 0x1
 BEGIN
     CONTROL         "",IDC_LIVE_HOTKEY,"msctls_hotkey32",WS_BORDER | WS_TABSTOP,69,108,80,12
-    LTEXT           "实施缩放模式在 Windows 7 及更高版本上受支持，在该模式下，缩放时会显示窗口更新。 ",IDC_STATIC,7,7,246,18
+    LTEXT           "实施缩放模式会动态更新画面。仅支持Win7及以上系统。 ",IDC_STATIC,7,7,246,18
     LTEXT           "切到实时缩放：",IDC_STATIC,7,110,62,8
     LTEXT           "若要进入和退出实时缩放模式，请输入下面指定的热键。",IDC_STATIC,7,94,218,13
     LTEXT           "请注意，在实时缩放模式中，必须使用 Ctrl+上 和 Ctrl+下 控制缩放级别。若要进入画笔模式，请使用标准的缩放-不绘制热键，然后转义以返回到实时缩放模式。",IDC_STATIC,7,30,246,27
@@ -269,7 +269,7 @@ BEGIN
     CONTROL         "",IDC_RECORD_HOTKEY,"msctls_hotkey32",WS_BORDER | WS_TABSTOP,61,96,80,12
     LTEXT           "录制切换：",IDC_STATIC,7,98,54,8
     LTEXT           "通过输入录制热键，通过重新输入录制热键来录制未缩放的实时屏幕或静态缩放会话的视频并完成录制。 ",IDC_STATIC,7,7,246,28
-    LTEXT           "注意：录制仅适用于 Windows 10（版本 1903）及更高版本。",IDC_STATIC,7,77,246,19
+    LTEXT           "录屏功能需要Win10(1903)及以上版本。",IDC_STATIC,7,77,246,19
     LTEXT           "缩放：",IDC_STATIC,30,115,26,8
     COMBOBOX        IDC_RECORD_SCALING,61,114,26,30,CBS_DROPDOWNLIST | CBS_AUTOHSCROLL | CBS_OEMCONVERT | CBS_SORT | WS_VSCROLL | WS_TABSTOP
     LTEXT           "帧率：",IDC_STATIC,119,115,44,8,NOT WS_VISIBLE
@@ -306,7 +306,7 @@ BEGIN
     EDITTEXT        IDC_DEMOTYPE_FILE,44,137,187,12,ES_AUTOHSCROLL | ES_READONLY
     LTEXT           "输入文件：",IDC_STATIC,7,139,32,8
     LTEXT           "当到达文件结尾时，ZoomIt 将重新加载文件并从开头开始。在相反模式下输入具有 Shift 键的热键，以返回到最后一个 [end]。",IDC_STATIC,7,108,248,24
-    LTEXT           "输入 DemoType 切换开关时，使用 DemoType 在输入文件中指定 ZoomIt 类型文本。如果剪贴板以 [start] 关键字 (keyword)为前缀，则还可以从剪贴板中拉取输入。",IDC_STATIC,7,7,248,24
+    LTEXT           "使用 DemoType 在输入文件中指定 ZoomIt 类型文本。如果剪贴板以 [start] 关键字 (keyword)为前缀，则还可以从剪贴板中拉取输入。",IDC_STATIC,7,7,248,24
     LTEXT           "  - 将片段与 [end] 关键字 (keyword)分开，并在 “n” 为秒的关键字 (keyword)使用 [pause：n] 将暂停插入到文本输出中。",IDC_STATIC,19,34,212,11
     LTEXT           "可以自动设置 ZoomIt 发送文本，也可以选择用于通过键入来驱动输入的选项。ZoomIt 将在发送输出时阻止键盘输入。",IDC_STATIC,7,68,248,16
     LTEXT           "在驱动输入时，按空格键可在片段末尾取消阻止键盘输入。在自动模式下，控件将在完成时返回。",IDC_STATIC,7,88,248,16
