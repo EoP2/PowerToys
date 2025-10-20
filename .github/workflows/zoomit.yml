@@ -18,6 +18,10 @@ jobs:
     
     - name: 恢复所有 NuGet 包
       run: nuget restore -Recursive
+
+    - name: 生成 version_gen.h
+      run: |
+        msbuild src/modules/ZoomIt/ZoomIt/ZoomIt.vcxproj /t:GenerateVersionData /p:Version=1.0.0
     
     - name: 编译 x64 (仅 ZoomIt 项目)
       working-directory: src/modules/ZoomIt/ZoomIt
