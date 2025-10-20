@@ -79,14 +79,14 @@ COLORREF	g_CustomColors[16];
 #define SNIP_PAGE	  7
 
 OPTION_TABS g_OptionsTabs[] = {
-    { _T("缩放"), NULL },
-    { _T("实时缩放"), NULL },
-    { _T("画笔"), NULL },
-    { _T("标注"), NULL },
-    { _T("预录标注"), NULL },
-    { _T("倒计时"), NULL },
-    { _T("录屏"), NULL },
-    { _T("截图"), NULL }
+    { _T("Zoom"), NULL },
+    { _T("LiveZoom"), NULL },
+    { _T("Draw"), NULL },
+    { _T("Type"), NULL },
+    { _T("DemoType"), NULL },
+    { _T("Break"), NULL },
+    { _T("Record"), NULL },
+    { _T("Snip"), NULL }
 };
 
 float g_ZoomLevels[] = {
