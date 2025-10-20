@@ -220,14 +220,14 @@ BREAK DIALOGEX 0, 0, 260, 123
 STYLE DS_SETFONT | DS_FIXEDSYS | DS_CONTROL | WS_CHILD | WS_SYSMENU
 FONT 8, "MS Shell Dlg", 400, 0, 0x1
 BEGIN
-    CONTROL         "",IDC_BREAK_HOTKEY,"msctls_hotkey32",WS_BORDER | WS_TABSTOP,52,67,80,12
-    EDITTEXT        IDC_TIMER,31,86,31,13,ES_RIGHT | ES_AUTOHSCROLL | ES_NUMBER
-    CONTROL         "",IDC_SPIN_TIMER,"msctls_updown32",UDS_SETBUDDYINT | UDS_ALIGNRIGHT | UDS_AUTOBUDDY | UDS_ARROWKEYS | UDS_NOTHOUSANDS,45,86,11,12
-    LTEXT           "分钟",IDC_STATIC,67,88,25,8
+    CONTROL         "",IDC_BREAK_HOTKEY,"msctls_hotkey32",WS_BORDER | WS_TABSTOP,82,67,80,12
+    EDITTEXT        IDC_TIMER,61,86,31,13,ES_RIGHT | ES_AUTOHSCROLL | ES_NUMBER
+    CONTROL         "",IDC_SPIN_TIMER,"msctls_updown32",UDS_SETBUDDYINT | UDS_ALIGNRIGHT | UDS_AUTOBUDDY | UDS_ARROWKEYS | UDS_NOTHOUSANDS,75,86,11,12
+    LTEXT           "分钟",IDC_STATIC,97,88,25,8
     PUSHBUTTON      "高级(&A)",IDC_ADVANCED_BREAK,212,102,41,14
     LTEXT           "使用 ZoomIt 托盘图标的 Break 菜单项进入计时器模式。使用箭头键增加和减少时间。如果 Alt-Tab 离开计时器窗口，请通过在 ZoomIt 托盘图标上左键单击来重新激活它。退出带 Esc 的计时器模式。",IDC_STATIC,7,7,246,33
-    LTEXT           "启动计时器：",IDC_STATIC,57,70,39,8
-    LTEXT           "计时器：",IDC_STATIC,57,88,20,8
+    LTEXT           "启动计时器：",IDC_STATIC,7,70,39,8
+    LTEXT           "计时器：",IDC_STATIC,7,88,20,8
     LTEXT           "使用与画笔颜色相同的键更改休息时间计时器颜色。休息时间计时器字体与文本字体相同。",IDC_STATIC,7,45,219,20
     CONTROL         "倒计时结束后显示超出时长：",IDC_CHECK_SHOW_EXPIRED,
                     "Button",BS_AUTOCHECKBOX | BS_LEFTTEXT | WS_TABSTOP,8,104,132,10
