@@ -1,0 +1,34 @@
+name: Build ZoomIt
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: windows-latest
+    
+    steps:
+    - name: 检出代码
+      uses: actions/checkout@v4
+      with:
+        submodules: recursive
+    
+    - name: 设置 MSBuild
+      uses: microsoft/setup-msbuild@v2
+    
+    - name: 恢复所有 NuGet 包
+      run: nuget restore -Recursive
+    
+    - name: 编译 x64 (仅 ZoomIt 项目)
+      working-directory: src/modules/ZoomIt/ZoomIt
+      run: msbuild.exe ZoomIt.vcxproj /p:Configuration=Release /p:Platform=x64 /m
+      shell: cmd
+    
+    - name: 上传编译产物
+      uses: actions/upload-artifact@v4
+      with:
+        name: ZoomIt-Release-x64
+        path: |
+          src/modules/ZoomIt/ZoomIt/x64/Release/*.exe
+          src/modules/ZoomIt/ZoomIt/x64/Release/*.dll
+        if-no-files-found: warn
