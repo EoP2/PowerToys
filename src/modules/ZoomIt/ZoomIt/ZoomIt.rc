@@ -210,7 +210,7 @@ TYPE DIALOGEX 0, 0, 260, 104
 STYLE DS_SETFONT | DS_FIXEDSYS | DS_CONTROL | WS_CHILD | WS_SYSMENU
 FONT 8, "MS Shell Dlg", 400, 0, 0x1
 BEGIN
-    LTEXT           "进入画笔模式后，键入“t”以进入键入模式，或 shift+“t”以进入右对齐输入的键入模式。按 Esc 或鼠标左键退出键入模式。使用鼠标滚轮或上下箭头键更改字号。",IDC_STATIC,7,7,246,32
+    LTEXT           "画笔模式下，按T进入画笔模式，或 Shift+T以进入右对齐输入的标注模式。按 Esc 或鼠标左键退出标注模式。使用鼠标滚轮或上下方向键调整字号。",IDC_STATIC,7,7,246,32
     LTEXT           "字体颜色和画笔相同。",IDC_STATIC,7,47,211,9
     PUSHBUTTON      "字体(&F)",IDC_FONT,112,69,41,14
     GROUPBOX        "文本字体",IDC_TEXT_FONT,8,61,99,28
@@ -226,8 +226,8 @@ BEGIN
     LTEXT           "分钟",IDC_STATIC,67,88,25,8
     PUSHBUTTON      "高级(&A)",IDC_ADVANCED_BREAK,212,102,41,14
     LTEXT           "使用 ZoomIt 托盘图标的 Break 菜单项进入计时器模式。使用箭头键增加和减少时间。如果 Alt-Tab 离开计时器窗口，请通过在 ZoomIt 托盘图标上左键单击来重新激活它。退出带 Esc 的计时器模式。",IDC_STATIC,7,7,246,33
-    LTEXT           "启动计时器：",IDC_STATIC,7,70,39,8
-    LTEXT           "计时器：",IDC_STATIC,7,88,20,8
+    LTEXT           "启动计时器：",IDC_STATIC,57,70,39,8
+    LTEXT           "计时器：",IDC_STATIC,57,88,20,8
     LTEXT           "使用与画笔颜色相同的键更改休息时间计时器颜色。休息时间计时器字体与文本字体相同。",IDC_STATIC,7,45,219,20
     CONTROL         "倒计时结束后显示超出时长：",IDC_CHECK_SHOW_EXPIRED,
                     "Button",BS_AUTOCHECKBOX | BS_LEFTTEXT | WS_TABSTOP,8,104,132,10
