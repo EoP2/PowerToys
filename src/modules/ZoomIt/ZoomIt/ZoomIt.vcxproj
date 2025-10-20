@@ -79,7 +79,7 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
       <Optimization>MaxSpeed</Optimization>
-      <PreprocessorDefinitions>__ZOOMIT_POWERTOYS__;_UNICODE;UNICODE;WINVER=0x602;NDEBUG;_WIN32_WINNT=0x602;_WIN32_WINDOWS=0x501;WIN32;_WINDOWS;MSVC6=1;_CRT_SECURE_NO_DEPRECATE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>;_UNICODE;UNICODE;WINVER=0x602;NDEBUG;_WIN32_WINNT=0x602;_WIN32_WINDOWS=0x501;WIN32;_WINDOWS;MSVC6=1;_CRT_SECURE_NO_DEPRECATE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <StringPooling>true</StringPooling>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
       <FunctionLevelLinking>true</FunctionLevelLinking>
@@ -101,7 +101,7 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
       <Optimization>MaxSpeed</Optimization>
-      <PreprocessorDefinitions>__ZOOMIT_POWERTOYS__;_UNICODE;UNICODE;WINVER=0x602;NDEBUG;_WIN32_WINNT=0x602;_WIN32_WINDOWS=0x501;WIN32;_WINDOWS;MSVC6=1;_CRT_SECURE_NO_DEPRECATE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>;_UNICODE;UNICODE;WINVER=0x602;NDEBUG;_WIN32_WINNT=0x602;_WIN32_WINDOWS=0x501;WIN32;_WINDOWS;MSVC6=1;_CRT_SECURE_NO_DEPRECATE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <StringPooling>true</StringPooling>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
       <FunctionLevelLinking>true</FunctionLevelLinking>
@@ -124,7 +124,7 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|ARM64'">
     <ClCompile>
       <Optimization>MaxSpeed</Optimization>
-      <PreprocessorDefinitions>__ZOOMIT_POWERTOYS__;_UNICODE;UNICODE;WINVER=0x602;NDEBUG;_WIN32_WINNT=0x602;_WIN32_WINDOWS=0x501;WIN32;_WINDOWS;MSVC6=1;_CRT_SECURE_NO_DEPRECATE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>;_UNICODE;UNICODE;WINVER=0x602;NDEBUG;_WIN32_WINNT=0x602;_WIN32_WINDOWS=0x501;WIN32;_WINDOWS;MSVC6=1;_CRT_SECURE_NO_DEPRECATE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <StringPooling>true</StringPooling>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
       <FunctionLevelLinking>true</FunctionLevelLinking>
@@ -146,7 +146,7 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <Optimization>Disabled</Optimization>
-      <PreprocessorDefinitions>__ZOOMIT_POWERTOYS__;_UNICODE;UNICODE;WINVER=0x0602;_DEBUG;_WIN32_WINNT=0x602.MSVC6;_WIN32_WINDOWS=0x600;WIN32;_WINDOWS;_WIN32_WINNT=0x602;MSVC6=1;_CRT_SECURE_NO_DEPRECATE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>;_UNICODE;UNICODE;WINVER=0x0602;_DEBUG;_WIN32_WINNT=0x602.MSVC6;_WIN32_WINDOWS=0x600;WIN32;_WINDOWS;_WIN32_WINNT=0x602;MSVC6=1;_CRT_SECURE_NO_DEPRECATE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
     </ClCompile>
@@ -167,7 +167,7 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
       <Optimization>Disabled</Optimization>
-      <PreprocessorDefinitions>__ZOOMIT_POWERTOYS__;_UNICODE;UNICODE;WINVER=0x0602;_DEBUG;_WIN32_WINNT=0x602.MSVC6;_WIN32_WINDOWS=0x600;WIN32;_WINDOWS;_WIN32_WINNT=0x602;MSVC6=1;_CRT_SECURE_NO_DEPRECATE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>;_UNICODE;UNICODE;WINVER=0x0602;_DEBUG;_WIN32_WINNT=0x602.MSVC6;_WIN32_WINDOWS=0x600;WIN32;_WINDOWS;_WIN32_WINNT=0x602;MSVC6=1;_CRT_SECURE_NO_DEPRECATE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
     </ClCompile>
@@ -189,7 +189,7 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|ARM64'">
     <ClCompile>
       <Optimization>Disabled</Optimization>
-      <PreprocessorDefinitions>__ZOOMIT_POWERTOYS__;_UNICODE;UNICODE;WINVER=0x0602;_DEBUG;_WIN32_WINNT=0x602.MSVC6;_WIN32_WINDOWS=0x600;WIN32;_WINDOWS;_WIN32_WINNT=0x602;MSVC6=1;_CRT_SECURE_NO_DEPRECATE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>;_UNICODE;UNICODE;WINVER=0x0602;_DEBUG;_WIN32_WINNT=0x602.MSVC6;_WIN32_WINDOWS=0x600;WIN32;_WINDOWS;_WIN32_WINNT=0x602;MSVC6=1;_CRT_SECURE_NO_DEPRECATE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
     </ClCompile>
@@ -293,7 +293,6 @@
   <ItemGroup>
     <ClInclude Include="AudioSampleGenerator.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\common\sysinternals\Eula\Eula.h" />
-    <ClInclude Include="$(MSBuildThisFileDirectory)..\ZoomItModuleInterface\Trace.h" />
     <ClInclude Include="pch.h" />
     <ClInclude Include="Registry.h" />
     <ClInclude Include="resource.h" />
@@ -310,14 +309,6 @@
     <Image Include="icon1.ico" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="$(MSBuildThisFileDirectory)..\ZoomItModuleInterface\Trace.cpp">
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Use</PrecompiledHeader>
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Use</PrecompiledHeader>
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|ARM64'">Use</PrecompiledHeader>
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|ARM64'">Use</PrecompiledHeader>
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Use</PrecompiledHeader>
-    </ClCompile>
     <ClCompile Include="CaptureFrameWait.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Use</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Use</PrecompiledHeader>
@@ -341,17 +332,6 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|ARM64'">true</ExcludedFromBuild>
     </ResourceCompile>
     <ResourceCompile Include="ZoomIt.rc" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\..\..\common\logger\logger.vcxproj">
-      <Project>{d9b8fc84-322a-4f9f-bbb9-20915c47ddfd}</Project>
-    </ProjectReference>
-    <ProjectReference Include="..\..\..\common\SettingsAPI\SettingsAPI.vcxproj">
-      <Project>{6955446d-23f7-4023-9bb3-8657f904af99}</Project>
-    </ProjectReference>
-    <ProjectReference Include="..\..\..\common\Telemetry\EtwTrace\EtwTrace.vcxproj">
-      <Project>{8f021b46-362b-485c-bfba-ccf83e820cbd}</Project>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <Import Project="..\..\..\..\deps\spdlog.props" />
