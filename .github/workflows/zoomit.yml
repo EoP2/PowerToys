@@ -21,7 +21,7 @@ jobs:
 
     - name: 生成 version_gen.h
       run: |
-        msbuild src/modules/ZoomIt/ZoomIt/ZoomIt.vcxproj /t:GenerateVersionData /p:Version=1.0.0
+        msbuild src/common/version/Version.vcxproj /t:GenerateVersionData /p:Version=1.0.0
     
     - name: 编译 x64 (仅 ZoomIt 项目)
       working-directory: src/modules/ZoomIt/ZoomIt
