@@ -116,7 +116,7 @@ END
 OPTIONS DIALOGEX 0, 0, 279, 325
 STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | DS_CENTER | WS_POPUP | WS_CLIPSIBLINGS | WS_CAPTION | WS_SYSMENU
 EXSTYLE WS_EX_CONTROLPARENT
-CAPTION "ZoomIt - Sysinternals: www.sysinternals.com"
+CAPTION "ZoomIt"
 FONT 8, "MS Shell Dlg", 0, 0, 0x0
 BEGIN
     DEFPUSHBUTTON   "确定",IDOK,166,306,50,14
@@ -128,15 +128,15 @@ BEGIN
     ICON            "APPICON",IDC_STATIC,12,9,20,20
     CONTROL         "显示托盘图标",IDC_SHOW_TRAY_ICON,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,13,295,105,10
     CONTROL         "",IDC_TAB,"SysTabControl32",TCS_MULTILINE | WS_TABSTOP,8,46,265,245
-    CONTROL         "在 Windows 启动时运行 ZoomIt",IDC_AUTOSTART,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,13,309,122,10
+    CONTROL         "开机启动 ZoomIt",IDC_AUTOSTART,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,13,309,122,10
 END
 
 ADVANCED_BREAK DIALOGEX 0, 0, 209, 219
 STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | DS_CENTER | WS_POPUP | WS_CAPTION | WS_SYSMENU
-CAPTION "高级中断选项"
+CAPTION "计时器高级选项"
 FONT 8, "MS Shell Dlg", 400, 0, 0x1
 BEGIN
-    CONTROL         "过期时播放声音：",IDC_CHECK_SOUND_FILE,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,3,11,98,10,WS_EX_RIGHT
+    CONTROL         "读秒结束时播放声音：",IDC_CHECK_SOUND_FILE,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,3,11,98,10,WS_EX_RIGHT
     EDITTEXT        IDC_SOUND_FILE,61,38,125,12,ES_AUTOHSCROLL | ES_READONLY
     PUSHBUTTON      "&...",IDC_SOUND_BROWSE,187,38,13,11
     COMBOBOX        IDC_OPACITY,62,58,38,30,CBS_DROPDOWNLIST | WS_VSCROLL | WS_TABSTOP
@@ -149,7 +149,7 @@ BEGIN
     CONTROL         "",IDC_TIMER_POS7,"Button",BS_AUTORADIOBUTTON,63,108,10,10
     CONTROL         "",IDC_TIMER_POS8,"Button",BS_AUTORADIOBUTTON,79,108,10,10
     CONTROL         "",IDC_TIMER_POS9,"Button",BS_AUTORADIOBUTTON,97,108,10,10
-    CONTROL         "显示背景位图：",IDC_CHECK_BACKGROUND_FILE,
+    CONTROL         "使用位图作为背景：",IDC_CHECK_BACKGROUND_FILE,
                     "Button",BS_AUTOCHECKBOX | WS_TABSTOP,3,122,99,10,WS_EX_RIGHT
     CONTROL         "将淡出的桌面用作背景",IDC_STATIC_DESKTOP_BACKGROUND,
                     "Button",BS_AUTORADIOBUTTON | WS_GROUP | WS_TABSTOP,46,135,125,10
@@ -158,11 +158,11 @@ BEGIN
     EDITTEXT        IDC_BACKGROUND_FILE,62,164,125,12,ES_AUTOHSCROLL | ES_READONLY
     PUSHBUTTON      "&...",IDC_BACKGROUND_BROWSE,188,164,13,11
     CONTROL         "缩放至屏幕：",IDC_CHECK_BACKGROUND_STRETCH,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,58,180,67,10,WS_EX_RIGHT
-    DEFPUSHBUTTON   "OK",IDOK,97,201,50,14
-    PUSHBUTTON      "Cancel",IDCANCEL,150,201,50,14
+    DEFPUSHBUTTON   "确定",IDOK,97,201,50,14
+    PUSHBUTTON      "取消",IDCANCEL,150,201,50,14
     LTEXT           "闹钟声音文件：",IDC_STATIC_SOUND_FILE,61,26,56,8
-    LTEXT           "计时器不透明度：",IDC_STATIC,8,59,48,8
-    LTEXT           "计时器位置：",IDC_STATIC,8,77,48,8
+    LTEXT           "不透明度：",IDC_STATIC,8,59,48,8
+    LTEXT           "位置：",IDC_STATIC,8,77,48,8
     CONTROL         "",IDC_STATIC,"Static",SS_BLACKFRAME | SS_SUNKEN,7,196,193,1,WS_EX_CLIENTEDGE
 END
 
@@ -191,9 +191,9 @@ DRAW DIALOGEX 0, 0, 260, 228
 STYLE DS_SETFONT | DS_FIXEDSYS | DS_CONTROL | WS_CHILD | WS_SYSMENU
 FONT 8, "MS Shell Dlg", 400, 0, 0x1
 BEGIN
-    LTEXT           "缩放后，按鼠标左键切换绘图模式。按 E 可使用 Ctrl+Z 和所有绘图撤消。将光标居中，空格键。按鼠标右键退出绘图模式。",IDC_STATIC,7,7,246,24
-    LTEXT           "笔划控制",IDC_PEN_CONTROL,7,38,40,8
-    LTEXT           "通过按左 Ctrl 和使用鼠标滚轮或向上键和向下箭头键更改笔宽度。",IDC_STATIC,19,48,233,16
+    LTEXT           "缩放后，按鼠标左键切换画笔模式。按 E 可使用 Ctrl+Z 和所有画笔撤消。将光标居中，空格键。按鼠标右键退出画笔模式。",IDC_STATIC,7,7,246,24
+    LTEXT           "粗细",IDC_PEN_CONTROL,7,38,40,8
+    LTEXT           "使用左 Clrt + 鼠标滚轮或上下键调整笔划粗细。",IDC_STATIC,19,48,233,16
     LTEXT           "颜色",IDC_COLORS,7,70,21,8
     LTEXT           "按 R (红色)、G (绿色)、B (蓝色)、O (橙色)、Y (黄色) 或 P (粉色) 更改笔划颜色。",IDC_STATIC,19,80,233,16
     LTEXT           "突出显示和模糊",IDC_HIGHLIGHT_AND_BLUR,7,102,58,8
@@ -210,10 +210,10 @@ TYPE DIALOGEX 0, 0, 260, 104
 STYLE DS_SETFONT | DS_FIXEDSYS | DS_CONTROL | WS_CHILD | WS_SYSMENU
 FONT 8, "MS Shell Dlg", 400, 0, 0x1
 BEGIN
-    LTEXT           "进入绘图模式后，键入“t”以进入键入模式，或 shift+“t”以进入右对齐输入的键入模式。按 Esc 或鼠标左键退出键入模式。使用鼠标滚轮或上下箭头键更改字号。",IDC_STATIC,7,7,246,32
-    LTEXT           "文本颜色是当前绘图颜色。",IDC_STATIC,7,47,211,9
-    PUSHBUTTON      "&Font",IDC_FONT,112,69,41,14
-    GROUPBOX        "Text Font",IDC_TEXT_FONT,8,61,99,28
+    LTEXT           "进入画笔模式后，键入“t”以进入键入模式，或 shift+“t”以进入右对齐输入的键入模式。按 Esc 或鼠标左键退出键入模式。使用鼠标滚轮或上下箭头键更改字号。",IDC_STATIC,7,7,246,32
+    LTEXT           "字体颜色和画笔相同。",IDC_STATIC,7,47,211,9
+    PUSHBUTTON      "字体(&F)",IDC_FONT,112,69,41,14
+    GROUPBOX        "文本字体",IDC_TEXT_FONT,8,61,99,28
 END
 
 BREAK DIALOGEX 0, 0, 260, 123
@@ -224,12 +224,12 @@ BEGIN
     EDITTEXT        IDC_TIMER,31,86,31,13,ES_RIGHT | ES_AUTOHSCROLL | ES_NUMBER
     CONTROL         "",IDC_SPIN_TIMER,"msctls_updown32",UDS_SETBUDDYINT | UDS_ALIGNRIGHT | UDS_AUTOBUDDY | UDS_ARROWKEYS | UDS_NOTHOUSANDS,45,86,11,12
     LTEXT           "分钟",IDC_STATIC,67,88,25,8
-    PUSHBUTTON      "高级(&A))&A",IDC_ADVANCED_BREAK,212,102,41,14
+    PUSHBUTTON      "高级(&A)",IDC_ADVANCED_BREAK,212,102,41,14
     LTEXT           "使用 ZoomIt 托盘图标的 Break 菜单项进入计时器模式。使用箭头键增加和减少时间。如果 Alt-Tab 离开计时器窗口，请通过在 ZoomIt 托盘图标上左键单击来重新激活它。退出带 Esc 的计时器模式。",IDC_STATIC,7,7,246,33
     LTEXT           "启动计时器：",IDC_STATIC,7,70,39,8
     LTEXT           "计时器：",IDC_STATIC,7,88,20,8
-    LTEXT           "使用与绘图颜色相同的键更改休息时间计时器颜色。休息时间计时器字体与文本字体相同。",IDC_STATIC,7,45,219,20
-    CONTROL         "显示到期后经过的时间：",IDC_CHECK_SHOW_EXPIRED,
+    LTEXT           "使用与画笔颜色相同的键更改休息时间计时器颜色。休息时间计时器字体与文本字体相同。",IDC_STATIC,7,45,219,20
+    CONTROL         "倒计时结束后显示超出时长：",IDC_CHECK_SHOW_EXPIRED,
                     "Button",BS_AUTOCHECKBOX | BS_LEFTTEXT | WS_TABSTOP,8,104,132,10
 END
 
@@ -240,7 +240,7 @@ FONT 8, "MS Shell Dlg", 0, 0, 0x0
 BEGIN
     LTEXT           "字体(&F)",1088,6,0,40,9
     COMBOBOX        1136,6,10,94,64,CBS_SIMPLE | CBS_OWNERDRAWFIXED | CBS_AUTOHSCROLL | CBS_SORT | CBS_HASSTRINGS | CBS_DISABLENOSCROLL | WS_VSCROLL | WS_TABSTOP
-    LTEXT           "Font St&yle:",1089,108,0,44,9
+    LTEXT           "样式(&Y)：",1089,108,0,44,9
     COMBOBOX        1137,108,10,64,64,CBS_SIMPLE | CBS_DISABLENOSCROLL | WS_VSCROLL | WS_TABSTOP
     LTEXT           "大小(&S)：",1090,179,0,30,9
     COMBOBOX        1138,179,10,32,64,CBS_SIMPLE | CBS_OWNERDRAWFIXED | CBS_SORT | CBS_HASSTRINGS | CBS_DISABLENOSCROLL | WS_VSCROLL | WS_TABSTOP
@@ -255,10 +255,10 @@ STYLE DS_SETFONT | DS_FIXEDSYS | DS_CONTROL | WS_CHILD | WS_SYSMENU
 FONT 8, "MS Shell Dlg", 400, 0, 0x1
 BEGIN
     CONTROL         "",IDC_LIVE_HOTKEY,"msctls_hotkey32",WS_BORDER | WS_TABSTOP,69,108,80,12
-    LTEXT           "LiveZoom 模式在 Windows 7 及更高版本上受支持，在该模式下，缩放时会显示窗口更新。 ",IDC_STATIC,7,7,246,18
-    LTEXT           "实时缩放切换：",IDC_STATIC,7,110,62,8
-    LTEXT           "若要进入并退出 LiveZoom，请输入下面指定的热键。",IDC_STATIC,7,94,218,13
-    LTEXT           "请注意，在 LiveZoom 中，必须使用 Ctrl+上 和 Ctrl+下 控制缩放级别。若要进入绘图模式，请使用标准的缩放-不绘制热键，然后转义以返回到 LiveZoom。",IDC_STATIC,7,30,246,27
+    LTEXT           "实施缩放模式在 Windows 7 及更高版本上受支持，在该模式下，缩放时会显示窗口更新。 ",IDC_STATIC,7,7,246,18
+    LTEXT           "切到实时缩放：",IDC_STATIC,7,110,62,8
+    LTEXT           "若要进入和退出实时缩放模式，请输入下面指定的热键。",IDC_STATIC,7,94,218,13
+    LTEXT           "请注意，在实时缩放模式中，必须使用 Ctrl+上 和 Ctrl+下 控制缩放级别。若要进入画笔模式，请使用标准的缩放-不绘制热键，然后转义以返回到实时缩放模式。",IDC_STATIC,7,30,246,27
     LTEXT           "使用 LiveDraw 绘制并批注实时桌面。若要激活 LiveDraw，请在相反模式下输入 Shift 键的热键。可通过激活 LiveDraw 删除 LiveDraw 注释并输入转义键。",IDC_STATIC,7,62,246,32
 END
 
@@ -298,7 +298,7 @@ BEGIN
     LTEXT           "DemoType 切换：",IDC_STATIC,7,157,63,8
     PUSHBUTTON      "&...",IDC_DEMOTYPE_BROWSE,231,137,16,13
     CONTROL         "",IDC_DEMOTYPE_SPEED_SLIDER,"msctls_trackbar32",TBS_AUTOTICKS | TBS_BOTH | TBS_NOTICKS | WS_TABSTOP,52,202,150,11,WS_EX_TRANSPARENT
-    CONTROL         "Drive input with typing:",IDC_DEMOTYPE_USER_DRIVEN,
+    CONTROL         "通过键入来驱动输入：",IDC_DEMOTYPE_USER_DRIVEN,
                     "Button",BS_AUTOCHECKBOX | BS_LEFTTEXT | WS_TABSTOP,7,173,88,10
     LTEXT           "DemoType 键入速度：",IDC_STATIC,7,189,215,10
     LTEXT           "慢",IDC_DEMOTYPE_STATIC1,51,213,18,8
@@ -323,7 +323,7 @@ END
 #ifdef APSTUDIO_INVOKED
 GUIDELINES DESIGNINFO
 BEGIN
-    "OPTIONS", DIALOG
+    "选项", DIALOG
     BEGIN
         RIGHTMARGIN, 273
         BOTTOMMARGIN, 320
@@ -335,7 +335,7 @@ BEGIN
         BOTTOMMARGIN, 215
     END
 
-    "ZOOM", DIALOG
+    "缩放", DIALOG
     BEGIN
         LEFTMARGIN, 7
         RIGHTMARGIN, 253
@@ -343,7 +343,7 @@ BEGIN
         BOTTOMMARGIN, 151
     END
 
-    "DRAW", DIALOG
+    "画笔", DIALOG
     BEGIN
         LEFTMARGIN, 7
         RIGHTMARGIN, 253
@@ -351,7 +351,7 @@ BEGIN
         BOTTOMMARGIN, 221
     END
 
-    "TYPE", DIALOG
+    "标注", DIALOG
     BEGIN
         LEFTMARGIN, 7
         RIGHTMARGIN, 253
@@ -359,7 +359,7 @@ BEGIN
         BOTTOMMARGIN, 97
     END
 
-    "BREAK", DIALOG
+    "倒计时", DIALOG
     BEGIN
         LEFTMARGIN, 7
         RIGHTMARGIN, 253
@@ -373,7 +373,7 @@ BEGIN
         BOTTOMMARGIN, 127
     END
 
-    "LIVEZOOM", DIALOG
+    "实时缩放", DIALOG
     BEGIN
         LEFTMARGIN, 7
         RIGHTMARGIN, 253
@@ -381,7 +381,7 @@ BEGIN
         BOTTOMMARGIN, 127
     END
 
-    "RECORD", DIALOG
+    "录屏", DIALOG
     BEGIN
         LEFTMARGIN, 7
         RIGHTMARGIN, 253
@@ -389,7 +389,7 @@ BEGIN
         BOTTOMMARGIN, 164
     END
 
-    "SNIP", DIALOG
+    "截图", DIALOG
     BEGIN
         LEFTMARGIN, 7
         RIGHTMARGIN, 253
@@ -397,7 +397,7 @@ BEGIN
         BOTTOMMARGIN, 61
     END
 
-    "DEMOTYPE", DIALOG
+    "预录标注", DIALOG
     BEGIN
         LEFTMARGIN, 7
         RIGHTMARGIN, 255
