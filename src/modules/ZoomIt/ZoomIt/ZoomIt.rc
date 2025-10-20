@@ -149,18 +149,18 @@ BEGIN
     CONTROL         "",IDC_TIMER_POS7,"Button",BS_AUTORADIOBUTTON,63,108,10,10
     CONTROL         "",IDC_TIMER_POS8,"Button",BS_AUTORADIOBUTTON,79,108,10,10
     CONTROL         "",IDC_TIMER_POS9,"Button",BS_AUTORADIOBUTTON,97,108,10,10
-    CONTROL         "使用位图作为背景：",IDC_CHECK_BACKGROUND_FILE,
+    CONTROL         "启用背景图像：",IDC_CHECK_BACKGROUND_FILE,
                     "Button",BS_AUTOCHECKBOX | WS_TABSTOP,3,122,99,10,WS_EX_RIGHT
-    CONTROL         "将淡出的桌面用作背景",IDC_STATIC_DESKTOP_BACKGROUND,
+    CONTROL         "使用半透明遮罩作为背景",IDC_STATIC_DESKTOP_BACKGROUND,
                     "Button",BS_AUTORADIOBUTTON | WS_GROUP | WS_TABSTOP,46,135,125,10
-    CONTROL         "使用图像文件作为背景",IDC_STATIC_BACKGROUND_FILE,
+    CONTROL         "使用图片作为背景",IDC_STATIC_BACKGROUND_FILE,
                     "Button",BS_AUTORADIOBUTTON | WS_TABSTOP,46,149,109,10
     EDITTEXT        IDC_BACKGROUND_FILE,62,164,125,12,ES_AUTOHSCROLL | ES_READONLY
     PUSHBUTTON      "&...",IDC_BACKGROUND_BROWSE,188,164,13,11
     CONTROL         "缩放至屏幕：",IDC_CHECK_BACKGROUND_STRETCH,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,58,180,67,10,WS_EX_RIGHT
     DEFPUSHBUTTON   "确定",IDOK,97,201,50,14
     PUSHBUTTON      "取消",IDCANCEL,150,201,50,14
-    LTEXT           "闹钟声音文件：",IDC_STATIC_SOUND_FILE,61,26,56,8
+    LTEXT           "选择提示音：",IDC_STATIC_SOUND_FILE,61,26,56,8
     LTEXT           "不透明度：",IDC_STATIC,8,59,48,8
     LTEXT           "位置：",IDC_STATIC,8,77,48,8
     CONTROL         "",IDC_STATIC,"Static",SS_BLACKFRAME | SS_SUNKEN,7,196,193,1,WS_EX_CLIENTEDGE
@@ -171,20 +171,20 @@ STYLE DS_SETFONT | DS_FIXEDSYS | DS_CONTROL | WS_CHILD | WS_CLIPSIBLINGS | WS_SY
 FONT 8, "MS Shell Dlg", 400, 0, 0x1
 BEGIN
     CONTROL         "",IDC_HOTKEY,"msctls_hotkey32",WS_BORDER | WS_TABSTOP,59,57,80,12
-    LTEXT           "切换 ZoomIt 后，可以使用鼠标滚轮或向上和向下箭头键进行放大。使用 Esc 或按鼠标右键退出缩放模式。",IDC_STATIC,7,6,246,26
-    LTEXT           "缩放切换：",IDC_STATIC,7,59,51,8
+    LTEXT           "鼠标滚轮或上下方向键缩放，Esc或按鼠标右键退出缩放。",IDC_STATIC,7,6,246,26
+    LTEXT           "缩放键：",IDC_STATIC,7,59,51,8
     CONTROL         "",IDC_ZOOM_SLIDER,"msctls_trackbar32",TBS_AUTOTICKS | TBS_BOTH | TBS_NOTICKS | WS_TABSTOP,53,118,150,15,WS_EX_TRANSPARENT
-    LTEXT           "在放大时指定初始放大级别：",IDC_STATIC,7,105,215,10
+    LTEXT           "初始放大级别：",IDC_STATIC,7,105,215,10
     LTEXT           "1.25",IDC_STATIC,52,136,16,8
     LTEXT           "1.5",IDC_STATIC,82,136,12,8
     LTEXT           "1.75",IDC_STATIC,108,136,16,8
     LTEXT           "2.0",IDC_STATIC,138,136,12,8
     LTEXT           "3.0",IDC_STATIC,164,136,12,8
     LTEXT           "4.0",IDC_STATIC,190,136,12,8
-    CONTROL         "动画缩放：",IDC_ANIMATE_ZOOM,"Button",BS_AUTOCHECKBOX | BS_LEFTTEXT | WS_TABSTOP,7,74,116,10
+    CONTROL         "动画效果：",IDC_ANIMATE_ZOOM,"Button",BS_AUTOCHECKBOX | BS_LEFTTEXT | WS_TABSTOP,7,74,116,10
     CONTROL         "平滑缩放图像：",IDC_SMOOTH_IMAGE,"Button",BS_AUTOCHECKBOX | BS_LEFTTEXT | WS_TABSTOP,7,88,116,10
-    LTEXT           "复制带有 Ctrl+C 的缩放屏幕，或通过键入 Ctrl+S 进行保存。通过输入 Ctrl+Shift 而不是 Ctrl 来裁剪副本或保存区域。",IDC_STATIC,7,148,246,17
-    LTEXT           "复制带有 Ctrl+C 的缩放屏幕，或通过键入 Ctrl+S 进行保存。通过输入 Ctrl+Shift 而不是 Ctrl 来裁剪副本或保存区域。",IDC_STATIC,6,34,246,18
+    LTEXT           "经过缩放的截图可按Ctrl+C复制，Ctrl+S保存，Ctrl+Shift+S裁剪。",IDC_STATIC,7,148,246,17
+    LTEXT           "经过缩放的截图可按Ctrl+C复制，Ctrl+S保存，Ctrl+Shift+S裁剪。",IDC_STATIC,6,34,246,18
 END
 
 DRAW DIALOGEX 0, 0, 260, 228
@@ -203,14 +203,14 @@ BEGIN
     LTEXT           "屏幕",IDC_SCREEN,7,166,22,8
     LTEXT           "按 W (白色) 或 K (实心) 清除草图板的屏幕。复制带有 Ctrl+C 的缩放屏幕，或通过键入 Ctrl+S 进行保存。通过输入 Ctrl+Shift 而不是 Ctrl 来裁剪副本或保存区域。",IDC_STATIC,19,176,233,24
     CONTROL         "",IDC_DRAW_HOTKEY,"msctls_hotkey32",WS_BORDER | WS_TABSTOP,73,207,80,12
-    LTEXT           "Draw w/out Zoom:",IDC_STATIC,7,210,63,11
+    LTEXT           "画笔键：",IDC_STATIC,7,210,63,11
 END
 
 TYPE DIALOGEX 0, 0, 260, 104
 STYLE DS_SETFONT | DS_FIXEDSYS | DS_CONTROL | WS_CHILD | WS_SYSMENU
 FONT 8, "MS Shell Dlg", 400, 0, 0x1
 BEGIN
-    LTEXT           "画笔模式下，按T进入画笔模式，或 Shift+T以进入右对齐输入的标注模式。按 Esc 或鼠标左键退出标注模式。使用鼠标滚轮或上下方向键调整字号。",IDC_STATIC,7,7,246,32
+    LTEXT           "画笔模式下，按T可进入标注模式，Shift+T可从右往左录入。鼠标滚轮或上下方向键调整字号。Esc或鼠标左键退出标注模式。",IDC_STATIC,7,7,246,32
     LTEXT           "字体颜色和画笔相同。",IDC_STATIC,7,47,211,9
     PUSHBUTTON      "字体(&F)",IDC_FONT,112,69,41,14
     GROUPBOX        "文本字体",IDC_TEXT_FONT,8,61,99,28
@@ -226,8 +226,8 @@ BEGIN
     LTEXT           "分钟",IDC_STATIC,97,88,25,8
     PUSHBUTTON      "高级(&A)",IDC_ADVANCED_BREAK,212,102,41,14
     LTEXT           "方向键可调整时长，ESC键退出。离开计时窗口后，可单击托盘图标激活界面。",IDC_STATIC,7,7,246,33
-    LTEXT           "启动计时器：",IDC_STATIC,7,70,50,8
-    LTEXT           "计时器：",IDC_STATIC,7,88,30,8
+    LTEXT           "倒计时键：",IDC_STATIC,7,70,50,8
+    LTEXT           "倒计时长：",IDC_STATIC,7,88,30,8
     LTEXT           "更改计时器颜色的快捷键和画笔一致，字体同标注一致。",IDC_STATIC,7,45,219,20
     CONTROL         "倒计时结束后显示超出时长：",IDC_CHECK_SHOW_EXPIRED,
                     "Button",BS_AUTOCHECKBOX | BS_LEFTTEXT | WS_TABSTOP,8,104,132,10
@@ -256,7 +256,7 @@ FONT 8, "MS Shell Dlg", 400, 0, 0x1
 BEGIN
     CONTROL         "",IDC_LIVE_HOTKEY,"msctls_hotkey32",WS_BORDER | WS_TABSTOP,69,108,80,12
     LTEXT           "实施缩放模式会动态更新画面。仅支持Win7及以上系统。 ",IDC_STATIC,7,7,246,18
-    LTEXT           "切到实时缩放：",IDC_STATIC,7,110,62,8
+    LTEXT           "实时缩放键：",IDC_STATIC,7,110,62,8
     LTEXT           "若要进入和退出实时缩放模式，请输入下面指定的热键。",IDC_STATIC,7,94,218,13
     LTEXT           "请注意，在实时缩放模式中，必须使用 Ctrl+上 和 Ctrl+下 控制缩放级别。若要进入画笔模式，请使用标准的缩放-不绘制热键，然后转义以返回到实时缩放模式。",IDC_STATIC,7,30,246,27
     LTEXT           "使用 LiveDraw 绘制并批注实时桌面。若要激活 LiveDraw，请在相反模式下输入 Shift 键的热键。可通过激活 LiveDraw 删除 LiveDraw 注释并输入转义键。",IDC_STATIC,7,62,246,32
@@ -267,7 +267,7 @@ STYLE DS_SETFONT | DS_FIXEDSYS | DS_CONTROL | WS_CHILD | WS_SYSMENU
 FONT 8, "MS Shell Dlg", 400, 0, 0x1
 BEGIN
     CONTROL         "",IDC_RECORD_HOTKEY,"msctls_hotkey32",WS_BORDER | WS_TABSTOP,61,96,80,12
-    LTEXT           "录制切换：",IDC_STATIC,7,98,54,8
+    LTEXT           "录屏键：",IDC_STATIC,7,98,54,8
     LTEXT           "通过输入录制热键，通过重新输入录制热键来录制未缩放的实时屏幕或静态缩放会话的视频并完成录制。 ",IDC_STATIC,7,7,246,28
     LTEXT           "录屏功能需要Win10(1903)及以上版本。",IDC_STATIC,7,77,246,19
     LTEXT           "缩放：",IDC_STATIC,30,115,26,8
@@ -286,7 +286,7 @@ STYLE DS_SETFONT | DS_FIXEDSYS | DS_CONTROL | WS_CHILD | WS_CLIPSIBLINGS | WS_SY
 FONT 8, "MS Shell Dlg", 400, 0, 0x1
 BEGIN
     CONTROL         "",IDC_SNIP_HOTKEY,"msctls_hotkey32",WS_BORDER | WS_TABSTOP,55,32,80,12
-    LTEXT           "截图切换：",IDC_STATIC,7,33,45,8
+    LTEXT           "截图键：",IDC_STATIC,7,33,45,8
     LTEXT           "将屏幕区域复制到剪贴板，或在相反模式下输入带有 Shift 键的热键以将其保存到文件。 ",IDC_STATIC,7,7,246,19
 END
 
@@ -295,16 +295,16 @@ STYLE DS_SETFONT | DS_FIXEDSYS | DS_CONTROL | WS_CHILD | WS_CLIPSIBLINGS | WS_SY
 FONT 8, "MS Shell Dlg", 400, 0, 0x1
 BEGIN
     CONTROL         "",IDC_DEMOTYPE_HOTKEY,"msctls_hotkey32",WS_BORDER | WS_TABSTOP,74,154,80,12
-    LTEXT           "DemoType 切换：",IDC_STATIC,7,157,63,8
+    LTEXT           "预录标注键：",IDC_STATIC,7,157,63,8
     PUSHBUTTON      "&...",IDC_DEMOTYPE_BROWSE,231,137,16,13
     CONTROL         "",IDC_DEMOTYPE_SPEED_SLIDER,"msctls_trackbar32",TBS_AUTOTICKS | TBS_BOTH | TBS_NOTICKS | WS_TABSTOP,52,202,150,11,WS_EX_TRANSPARENT
     CONTROL         "通过键入来驱动输入：",IDC_DEMOTYPE_USER_DRIVEN,
                     "Button",BS_AUTOCHECKBOX | BS_LEFTTEXT | WS_TABSTOP,7,173,88,10
-    LTEXT           "DemoType 键入速度：",IDC_STATIC,7,189,215,10
+    LTEXT           "录入速度：",IDC_STATIC,7,189,215,10
     LTEXT           "慢",IDC_DEMOTYPE_STATIC1,51,213,18,8
     LTEXT           "快",IDC_DEMOTYPE_STATIC2,186,213,17,8
     EDITTEXT        IDC_DEMOTYPE_FILE,44,137,187,12,ES_AUTOHSCROLL | ES_READONLY
-    LTEXT           "输入文件：",IDC_STATIC,7,139,32,8
+    LTEXT           "预录制文本：",IDC_STATIC,7,139,32,8
     LTEXT           "当到达文件结尾时，ZoomIt 将重新加载文件并从开头开始。在相反模式下输入具有 Shift 键的热键，以返回到最后一个 [end]。",IDC_STATIC,7,108,248,24
     LTEXT           "使用 DemoType 在输入文件中指定 ZoomIt 类型文本。如果剪贴板以 [start] 关键字 (keyword)为前缀，则还可以从剪贴板中拉取输入。",IDC_STATIC,7,7,248,24
     LTEXT           "  - 将片段与 [end] 关键字 (keyword)分开，并在 “n” 为秒的关键字 (keyword)使用 [pause：n] 将暂停插入到文本输出中。",IDC_STATIC,19,34,212,11
